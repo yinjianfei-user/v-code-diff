@@ -1,0 +1,32 @@
+.hljs {
+  display: inline-block;
+  padding: 0;
+  background: transparent;
+  vertical-align: middle;
+}
+.d2h-wrapper {
+  position: relative;
+  .d2h-files-diff {
+    position: relative;
+    > .d2h-file-side-diff ~ .d2h-file-side-diff {
+      position: absolute;
+    }
+  }
+  .d2h-file-side-diff {
+    margin-bottom: -5px;
+  }
+  .d2h-code-side-emptyplaceholder {
+    max-height: 19px;
+  }
+  .d2h-code-side-line,
+  .d2h-code-line {
+    width: auto;
+  }
+  .d2h-code-side-line .d2h-info {
+    height: 18px;
+  }
+  .d2h-code-linenumber,
+  .d2h-code-side-linenumber {
+    height: 19px;
+  }
+}
