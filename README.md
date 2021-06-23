@@ -1,6 +1,6 @@
 # VCodeDiff
 
-[![NPM version](https://img.shields.io/npm/v/v-code-diff.svg?style=flat)](https://www.npmjs.com/package/vue-katex) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![NPM version](https://img.shields.io/npm/v/v-code-diff.svg?style=flat)](https://www.npmjs.com/package/v-code-diff) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A code diff display plugin, available for Vue2 / Vue3.
 It is the vue3 version of [vue-code-diff](https://github.com/ddchef/vue-code-diff), refer to a lot of code, thanks here.
