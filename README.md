@@ -111,9 +111,9 @@ export default {
 </script>
 ```
 
-# Arguments
+# Props
 
-| Argument      | Description    | Type      | Optional       | 默认值   |
+| Prop      | Description    | Type      | Optional       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | old-string| old string | string  |   —    |    —     |
 | new-string| new string| string  |   —    |    —     |
@@ -128,6 +128,19 @@ export default {
 
 * Support `vue3`
 * Smaller package size
+
+# Todo
+-[ ] faster render
+
+# ChangeLog
+
+### 0.0.3
+1. Prop: `context` default value changed from 5 to 10
+2. fix possible line-height conflict(such as `antd.css` in [antd-vue](https://github.com/vueComponent/ant-design-vue))
+### 0.0.1
+First Version.  
+
+
 # LICENCE
 
 MIT License

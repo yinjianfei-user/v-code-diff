@@ -125,6 +125,18 @@ export default {
 * 支持 `vue3`
 * 更小的打包体积
 
+# Todo
+-[ ] 更快的渲染速度
+
+# 变更记录
+
+### 0.0.3
+1. Prop: `context` 默认值由 5 改为 10
+2. 修复可能存在的 line-height 冲突 (如 [antd-vue](https://github.com/vueComponent/ant-design-vue) 的 `antd.css` )
+### 0.0.1
+第一个版本.
+
+
 # LICENCE
 
 MIT License

@@ -1,23 +1,25 @@
 <template>
   <code-diff
-    :old-string="`const a = ['1','2','3']`"
-    :new-string="`const a = ['1','2','3',4]`"
-    file-name="aaa"
-    output-format="side-by-side" />
-  <code-diff
-    :old-string="'12345'"
-    :new-string="'3456'"
-    file-name="test.txt"
+    :old-string="oldString"
+    :new-string="newString"
     output-format="side-by-side" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import CodeDiff from './lib/v-code-diff/v-code-diff.ts'
+import { newShortText } from './new-short-text'
+import { oldShortText } from './old-short-text'
 
 export default defineComponent({
   name: 'App',
-  components: { CodeDiff }
+  components: { CodeDiff },
+  setup () {
+    return {
+      oldString: oldShortText,
+      newString: newShortText
+    }
+  }
 })
 </script>
 
@@ -28,6 +30,5 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

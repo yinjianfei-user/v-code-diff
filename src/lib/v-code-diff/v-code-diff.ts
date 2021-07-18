@@ -17,7 +17,7 @@ export default defineComponent({
     },
     context: {
       type: Number,
-      default: 5
+      default: 10
     },
     outputFormat: {
       type: String,

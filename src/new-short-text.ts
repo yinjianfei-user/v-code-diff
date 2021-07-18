@@ -1,7 +1,8 @@
+export const newShortText = `
 {
   "name": "v-code-diff",
   "description": "A diff plugin of vue, support vue2 and vue3",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "npx rimraf dist && rollup --config rollup.config.js",
@@ -111,3 +112,4 @@
     ]
   }
 }
+`
