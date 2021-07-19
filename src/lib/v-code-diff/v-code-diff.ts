@@ -2,7 +2,7 @@ import { computed, defineComponent, onMounted } from 'vue-demi'
 import { createHtml } from '@/lib/v-code-diff/util'
 import h from '@/lib/v-code-diff/h-demi'
 import hljs from 'highlight.js'
-import './style.scss'
+import './styles'
 
 export default defineComponent({
   name: 'CodeDiff',

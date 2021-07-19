@@ -1,7 +1,7 @@
 {
   "name": "v-code-diff",
   "description": "A diff plugin of vue, support vue2 and vue3",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "dev": "vite",
     "build": "npx rimraf dist && rollup --config rollup.config.js",
@@ -44,7 +44,7 @@
   "dependencies": {
     "diff": "^5.0.0",
     "diff2html": "^3.4.5",
-    "highlight.js": "^10.7.3",
+    "highlight.js": "^10.5.0",
     "vue-demi": "latest"
   },
   "devDependencies": {

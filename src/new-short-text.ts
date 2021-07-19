@@ -1,4 +1,6 @@
-export const newShortText = `
+import { ref } from 'vue-demi'
+
+export let newShortText = ref(`
 {
   "name": "v-code-diff",
   "description": "A diff plugin of vue, support vue2 and vue3",
@@ -113,3 +115,4 @@ export const newShortText = `
   }
 }
 `
+)

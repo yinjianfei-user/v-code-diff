@@ -7,6 +7,11 @@ It is the vue3 version of [vue-code-diff](https://github.com/ddchef/vue-code-dif
 
 > [🇨🇳 中文文档](./README-zh.md)
 
+# Attention!
+This plugin will be slower than [vue-code-diff](https://github.com/ddchef/vue-code-diff) because [vue-code-diff](https://github.com/ddchef/vue-code-diff) uses plugin [highlight.js](https://github.com/highlightjs/highlight.js) version 9, and this version has security issues. My plugin uses version 10, but the test found that the performance is not as good as version 9
+
+I am looking for a solution or mitigation, which may be to use highlighting as an option, or to use asynchronous tasks to render (so that it does not block the ui), or to solve the problem in terms of performance. If you have a good idea, you are also welcome to raise an issue or pr to help me.
+
 # Installation
 
 Install `v-code-diff`
@@ -134,6 +139,8 @@ export default {
 
 # ChangeLog
 
+### 0.0.4
+1. Fix the problem of abnormal rendering in some browsers (such as safari)
 ### 0.0.3
 1. Prop: `context` default value changed from 5 to 10
 2. fix possible line-height conflict(such as `antd.css` in [antd-vue](https://github.com/vueComponent/ant-design-vue))

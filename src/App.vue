@@ -1,4 +1,6 @@
 <template>
+  <textarea v-model="oldString" style="width: 49%; height: 400px;" />
+  <textarea v-model="newString" style="width: 49%; height: 400px;" />
   <code-diff
     :old-string="oldString"
     :new-string="newString"

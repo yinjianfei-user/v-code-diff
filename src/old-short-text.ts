@@ -1,4 +1,6 @@
-export const oldShortText = `
+import { ref } from 'vue-demi'
+
+export let oldShortText = ref(`
 {
   "name": "vatex",
   "description": "A plugin of vue latex(base on katex), support vue2 and vue3",
@@ -111,3 +113,4 @@ export const oldShortText = `
   }
 }
 `
+)
