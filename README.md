@@ -91,7 +91,7 @@ export default defineComponent({
 import Vue from 'vue';
 import CodeDiff from 'v-code-diff'
 
-Vue.use(VueKatex);
+Vue.use(CodeDiff);
 ```
 
 #### Register locally
