@@ -2,15 +2,21 @@
 
 [![NPM version](https://img.shields.io/npm/v/v-code-diff.svg?style=flat)](https://www.npmjs.com/package/v-code-diff) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A code diff display plugin, available for Vue2 / Vue3.
-It is the vue3 version of [vue-code-diff](https://github.com/ddchef/vue-code-diff), refer to a lot of code, thanks here.
+A code diff display plugin, available for Vue2 / Vue3. It is the vue3 version
+of [vue-code-diff](https://github.com/ddchef/vue-code-diff), refer to a lot of code, thanks here.
 
 > [🇨🇳 中文文档](./README-zh.md)
 
 # Attention!
-This plugin will be slower than [vue-code-diff](https://github.com/ddchef/vue-code-diff) because [vue-code-diff](https://github.com/ddchef/vue-code-diff) uses plugin [highlight.js](https://github.com/highlightjs/highlight.js) version 9, and this version has security issues. My plugin uses version 10, but the test found that the performance is not as good as version 9
 
-I am looking for a solution or mitigation, which may be to use highlighting as an option, or to use asynchronous tasks to render (so that it does not block the ui), or to solve the problem in terms of performance. If you have a good idea, you are also welcome to raise an issue or pr to help me.
+This plugin will be slower than [vue-code-diff](https://github.com/ddchef/vue-code-diff)
+because [vue-code-diff](https://github.com/ddchef/vue-code-diff) uses
+plugin [highlight.js](https://github.com/highlightjs/highlight.js) version 9, and this version has security issues. My
+plugin uses version 10, but the test found that the performance is not as good as version 9
+
+I am looking for a solution or mitigation, which may be to use highlighting as an option, or to use asynchronous tasks
+to render (so that it does not block the ui), or to solve the problem in terms of performance. If you have a good idea,
+you are also welcome to raise an issue or pr to help me.
 
 # Installation
 
@@ -37,7 +43,7 @@ yarn add @vue/composition-api
 #### Register globally
 
 ```ts
-import {createApp} from 'vue'
+import { createApp } from 'vue'
 import CodeDiff from 'v-code-diff'
 
 app
@@ -48,12 +54,13 @@ app
 Then
 
 ```vue
+
 <template>
   <code-diff
     :old-string="'12345'"
     :new-string="'3456'"
     file-name="test.txt"
-    output-format="side-by-side" />
+    output-format="side-by-side"/>
 </template>
 ```
 
@@ -68,10 +75,10 @@ in vue file
     :old-string="'12345'"
     :new-string="'3456'"
     file-name="test.txt"
-    output-format="side-by-side" />
+    output-format="side-by-side"/>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 import { CodeDiff } from 'v-code-diff'
 
 export default defineComponent({
@@ -97,12 +104,13 @@ Vue.use(CodeDiff);
 #### Register locally
 
 ```vue
+
 <template>
   <code-diff
     :old-string="'12345'"
     :new-string="'3456'"
     file-name="test.txt"
-    output-format="side-by-side" />
+    output-format="side-by-side"/>
 </template>
 <script>
 import { CodeDiff } from 'v-code-diff'
@@ -120,6 +128,7 @@ export default {
 
 | Prop      | Description    | Type      | Optional       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
+| highlight| control whether to highlight the code | boolean  |   —    |    true     |
 | old-string| old string | string  |   —    |    —     |
 | new-string| new string| string  |   —    |    —     |
 | context| number of show context lines | number  |   —    |    —     |
@@ -135,18 +144,27 @@ export default {
 * Smaller package size
 
 # Todo
--[ ] faster render
+
+- [ ] faster render
 
 # ChangeLog
 
+### 0.1.0
+
+1. Add prop `highlight` to control whether to highlight the code.
+
 ### 0.0.4
+
 1. Fix the problem of abnormal rendering in some browsers (such as safari)
+
 ### 0.0.3
+
 1. Prop: `context` default value changed from 5 to 10
 2. fix possible line-height conflict(such as `antd.css` in [antd-vue](https://github.com/vueComponent/ant-design-vue))
-### 0.0.1
-First Version.  
 
+### 0.0.1
+
+First Version.
 
 # LICENCE
 

@@ -2,8 +2,8 @@ import { createPatch } from 'diff'
 import * as d2h from 'diff2html'
 
 export const createHtml = (oldString, newString, context, outputFormat, drawFileList, renderNothingWhenEmpty, fileName, isShowNoChange) => {
-  function highlight (html) {
-    return html.replace(/<span class="d2h-code-line-ctn">(.+?)<\/span>/g, '<span class="d2h-code-line-ctn"><code>$1</code></span>')
+  function wrapCode (html) {
+    return html.replace(/<span class="d2h-code-line-ctn">(.+?)<\/span>/g, '<span class="d2h-code-line-ctn"><pre><code>$1</code></pre></span>')
   }
   if (isShowNoChange) {
     oldString = 'File Without Change\tOldString: ======================== \n' + oldString
@@ -16,5 +16,5 @@ export const createHtml = (oldString, newString, context, outputFormat, drawFile
     matching: 'lines',
     renderNothingWhenEmpty: renderNothingWhenEmpty
   })
-  return highlight(html)
+  return wrapCode(html)
 }

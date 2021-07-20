@@ -7,6 +7,10 @@ import './styles'
 export default defineComponent({
   name: 'CodeDiff',
   props: {
+    highlight: {
+      type: Boolean,
+      default: true
+    },
     oldString: {
       type: String,
       default: ''
@@ -47,10 +51,12 @@ export default defineComponent({
   setup (props) {
     const html = computed(() => createHtml(props.oldString, props.newString, props.context, props.outputFormat, props.drawFileList, props.renderNothingWhenEmpty, props.fileName, props.isShowNoChange))
     onMounted(() => {
-      const elements = document.querySelectorAll('.d2h-wrapper code')
-      elements.forEach((el) => {
-        hljs.highlightElement(<HTMLElement>el)
-      })
+      if (props.highlight) {
+        const elements = document.querySelectorAll('.d2h-wrapper .d2h-code-line-ctn')
+        elements.forEach((el) => {
+          hljs.highlightElement(<HTMLElement>el)
+        })
+      }
     })
     return {
       html

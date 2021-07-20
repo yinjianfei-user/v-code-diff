@@ -116,13 +116,14 @@ export default {
 
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| old-string| 陈旧的字符串| string  |   —    |    —     |
-| new-string| 新的字符串| string  |   —    |    —     |
-| context| 不同地方上下间隔多少行不隐藏 | number  |   —    |    —     |
+| highlight | 控制是否高亮代码| boolean  |   -    |    true     |
+| old-string| 陈旧的字符串| string  |   -    |    -     |
+| new-string| 新的字符串| string  |   -    |    -     |
+| context| 不同地方上下间隔多少行不隐藏 | number  |   -    |    -     |
 | outputFormat| 展示的方式 | string  |   line-by-line，side-by-side    |    line-by-line     |
 | drawFileList | 展示对比文件列表 | boolean | - | false |
 | renderNothingWhenEmpty | 当无对比时不渲染 | boolean | - | false |
-| fileName | 文件名 | string | - |  |
+| fileName | 文件名 | string | - | - |
 | isShowNoChange | 当无对比时展示源代码 | boolean | - | false |
 
 # 与 vue-code-diff 的不同
@@ -131,10 +132,11 @@ export default {
 * 更小的打包体积
 
 # Todo
--[ ] 更快的渲染速度
+- [ ] 更快的渲染速度
 
 # 变更记录
-
+### 0.1.0
+1. 添加 Prop `highlight` 来控制是否高亮代码
 ### 0.0.4
 1. 修复一些浏览器下渲染异常的问题（例如 safari）
 ### 0.0.3
