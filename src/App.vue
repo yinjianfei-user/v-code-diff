@@ -4,7 +4,9 @@
   <code-diff
     :old-string="oldString"
     :new-string="newString"
-    output-format="side-by-side" />
+    output-format="side-by-side"
+    @before-render="renderStart"
+    @after-render="renderEnd" />
 </template>
 
 <script lang="ts">
@@ -17,9 +19,17 @@ export default defineComponent({
   name: 'App',
   components: { CodeDiff },
   setup () {
+    const renderStart = () => {
+      console.log('render start: ' + new Date().toLocaleString())
+    }
+    const renderEnd = () => {
+      console.log('render end: ' + new Date().toLocaleString())
+    }
     return {
       oldString: oldShortText,
-      newString: newShortText
+      newString: newShortText,
+      renderStart,
+      renderEnd
     }
   }
 })
@@ -30,7 +40,7 @@ export default defineComponent({
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /*text-align: center;*/
   color: #2c3e50;
 }
 </style>

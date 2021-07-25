@@ -7,17 +7,6 @@ of [vue-code-diff](https://github.com/ddchef/vue-code-diff), refer to a lot of c
 
 > [🇨🇳 中文文档](./README-zh.md)
 
-# Attention!
-
-This plugin will be slower than [vue-code-diff](https://github.com/ddchef/vue-code-diff)
-because [vue-code-diff](https://github.com/ddchef/vue-code-diff) uses
-plugin [highlight.js](https://github.com/highlightjs/highlight.js) version 9, and this version has security issues. My
-plugin uses version 10, but the test found that the performance is not as good as version 9
-
-I am looking for a solution or mitigation, which may be to use highlighting as an option, or to use asynchronous tasks
-to render (so that it does not block the ui), or to solve the problem in terms of performance. If you have a good idea,
-you are also welcome to raise an issue or pr to help me.
-
 # Installation
 
 Install `v-code-diff`
@@ -43,12 +32,12 @@ yarn add @vue/composition-api
 #### Register globally
 
 ```ts
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import CodeDiff from 'v-code-diff'
 
 app
-  .use(CodeDiff)
-  .mount('#app')
+    .use(CodeDiff)
+    .mount('#app')
 ```
 
 Then
@@ -57,10 +46,10 @@ Then
 
 <template>
   <code-diff
-    :old-string="'12345'"
-    :new-string="'3456'"
-    file-name="test.txt"
-    output-format="side-by-side"/>
+      :old-string="'12345'"
+      :new-string="'3456'"
+      file-name="test.txt"
+      output-format="side-by-side"/>
 </template>
 ```
 
@@ -72,14 +61,14 @@ in vue file
 
 <template>
   <code-diff
-    :old-string="'12345'"
-    :new-string="'3456'"
-    file-name="test.txt"
-    output-format="side-by-side"/>
+      :old-string="'12345'"
+      :new-string="'3456'"
+      file-name="test.txt"
+      output-format="side-by-side"/>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { CodeDiff } from 'v-code-diff'
+import {defineComponent} from 'vue'
+import {CodeDiff} from 'v-code-diff'
 
 export default defineComponent({
   components: {
@@ -107,13 +96,13 @@ Vue.use(CodeDiff);
 
 <template>
   <code-diff
-    :old-string="'12345'"
-    :new-string="'3456'"
-    file-name="test.txt"
-    output-format="side-by-side"/>
+      :old-string="'12345'"
+      :new-string="'3456'"
+      file-name="test.txt"
+      output-format="side-by-side"/>
 </template>
 <script>
-import { CodeDiff } from 'v-code-diff'
+import {CodeDiff} from 'v-code-diff'
 
 export default {
   name: 'App',
@@ -124,9 +113,16 @@ export default {
 </script>
 ```
 
+# Events
+
+| Event Name   | Description    | Callback Params   |
+|---------- |-------- |---------- |
+| before-render | hook before rendering | -  |
+| after-render | hook after rendering | -  |
+
 # Props
 
-| Prop      | Description    | Type      | Optional       | 默认值   |
+| Prop      | Description    | Type      | Optional       | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
 | highlight| control whether to highlight the code | boolean  |   —    |    true     |
 | old-string| old string | string  |   —    |    —     |
@@ -142,12 +138,19 @@ export default {
 
 * Support `vue3`
 * Smaller package size
+* Faster rendering speed
 
 # Todo
 
-- [ ] faster render
+- [x] faster render
 
 # ChangeLog
+
+### 0.2.1
+
+1. Use the function of asynchronous rendering of the highlight code, without blocking the ui, greatly improving the page
+   rendering speed
+2. Add hook function (before rendering, after rendering): `before-render`, `after-render`
 
 ### 0.1.0
 

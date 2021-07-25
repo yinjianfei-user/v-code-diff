@@ -3,11 +3,6 @@
 Vue2 / Vue3 可用的 code diff 插件  
 是 [vue-code-diff](https://github.com/ddchef/vue-code-diff) 的 vue3 版本， 参考了大幅代码，在这里表示感谢
 
-# 注意
-这个插件会慢于 [vue-code-diff](https://github.com/ddchef/vue-code-diff) ，因为 [vue-code-diff](https://github.com/ddchef/vue-code-diff) 使用了 highlight.js 版本 9，而这个版本有安全问题。本插件使用版本 10，但测试发现性能不如版本 9
-
-我正在寻找解决或缓解的办法，可能是将高亮作为一个可选项，或使用异步任务来渲染（这样不阻塞ui），亦或是从性能上解决问题。如果你有好想法，也欢迎提出 issue 或 pr 协助我。
-
 # 如何安装？
 
 安装 `v-code-diff`
@@ -37,19 +32,20 @@ import {createApp} from 'vue'
 import CodeDiff from 'v-code-diff'
 
 app
-  .use(CodeDiff)
-  .mount('#app')
+    .use(CodeDiff)
+    .mount('#app')
 ```
 
 然后
 
 ```vue
+
 <template>
   <code-diff
-    :old-string="'12345'"
-    :new-string="'3456'"
-    file-name="test.txt"
-    output-format="side-by-side" />
+      :old-string="'12345'"
+      :new-string="'3456'"
+      file-name="test.txt"
+      output-format="side-by-side"/>
 </template>
 ```
 
@@ -61,14 +57,14 @@ app
 
 <template>
   <code-diff
-    :old-string="'12345'"
-    :new-string="'3456'"
-    file-name="test.txt"
-    output-format="side-by-side" />
+      :old-string="'12345'"
+      :new-string="'3456'"
+      file-name="test.txt"
+      output-format="side-by-side"/>
 </template>
 <script lang="ts">
 import {defineComponent} from 'vue'
-import { CodeDiff } from 'v-code-diff'
+import {CodeDiff} from 'v-code-diff'
 
 export default defineComponent({
   components: {
@@ -93,15 +89,16 @@ Vue.use(CodeDiff);
 #### 单独引入
 
 ```vue
+
 <template>
   <code-diff
-    :old-string="'12345'"
-    :new-string="'3456'"
-    file-name="test.txt"
-    output-format="side-by-side" />
+      :old-string="'12345'"
+      :new-string="'3456'"
+      file-name="test.txt"
+      output-format="side-by-side"/>
 </template>
 <script>
-import { CodeDiff } from 'v-code-diff'
+import {CodeDiff} from 'v-code-diff'
 
 export default {
   name: 'App',
@@ -112,7 +109,14 @@ export default {
 </script>
 ```
 
-# 参数说明
+# 事件
+
+| 事件名称      | 说明    | 回调参数     |
+|---------- |-------- |---------- |
+| before-render | 渲染前触发 | -  |
+| after-render | 渲染后触发 | -  |
+
+# 参数
 
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
@@ -130,21 +134,35 @@ export default {
 
 * 支持 `vue3`
 * 更小的打包体积
+* 更快的渲染速度
 
 # Todo
-- [ ] 更快的渲染速度
+
+- [x] 更快的渲染速度(使用了异步渲染，不阻塞ui)
 
 # 变更记录
+
+### 0.2.1
+
+1. 使用异步渲染高亮代码的功能，不阻塞 ui，极大提升页面渲染速度
+2. 增加钩子函数(渲染前，渲染后): `before-render`, `after-render`
+
 ### 0.1.0
+
 1. 添加 Prop `highlight` 来控制是否高亮代码
+
 ### 0.0.4
+
 1. 修复一些浏览器下渲染异常的问题（例如 safari）
+
 ### 0.0.3
+
 1. Prop: `context` 默认值由 5 改为 10
 2. 修复可能存在的 line-height 冲突 (如 [antd-vue](https://github.com/vueComponent/ant-design-vue) 的 `antd.css` )
-### 0.0.1
-第一个版本.
 
+### 0.0.1
+
+第一个版本.
 
 # LICENCE
 

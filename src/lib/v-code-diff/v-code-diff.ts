@@ -1,7 +1,6 @@
-import { computed, defineComponent, onMounted } from 'vue-demi'
-import { createHtml } from '@/lib/v-code-diff/util'
+import { computed, defineComponent, onMounted, onUpdated, PropType } from 'vue-demi'
+import { createHtml, highlightElements } from '@/lib/v-code-diff/util'
 import h from '@/lib/v-code-diff/h-demi'
-import hljs from 'highlight.js'
 import './styles'
 
 export default defineComponent({
@@ -24,7 +23,7 @@ export default defineComponent({
       default: 10
     },
     outputFormat: {
-      type: String,
+      type: String as PropType<'line-by-line' | 'side-by-side'>,
       default: 'line-by-line'
     },
     drawFileList: {
@@ -48,14 +47,18 @@ export default defineComponent({
       default: false
     }
   },
-  setup (props) {
-    const html = computed(() => createHtml(props.oldString, props.newString, props.context, props.outputFormat, props.drawFileList, props.renderNothingWhenEmpty, props.fileName, props.isShowNoChange))
+  emits: ['before-render', 'after-render'],
+  setup (props, ctx) {
+    const html = computed(() => createHtml(props)
+    )
     onMounted(() => {
       if (props.highlight) {
-        const elements = document.querySelectorAll('.d2h-wrapper .d2h-code-line-ctn')
-        elements.forEach((el) => {
-          hljs.highlightElement(<HTMLElement>el)
-        })
+        highlightElements(props, ctx)
+      }
+    })
+    onUpdated(() => {
+      if (props.highlight) {
+        highlightElements(props, ctx)
       }
     })
     return {

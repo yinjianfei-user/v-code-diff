@@ -4,7 +4,7 @@
   .d2h-files-diff {
     position: relative;
     > .d2h-file-side-diff ~ .d2h-file-side-diff {
-      position: absolute;
+      //position: absolute;
     }
   }
   .d2h-file-side-diff {
@@ -23,8 +23,5 @@
   .d2h-code-linenumber,
   .d2h-code-side-linenumber {
     height: 19px;
-  }
-  pre {
-    margin: 0;
   }
 }
