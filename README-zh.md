@@ -127,6 +127,7 @@ export default {
 | outputFormat| 展示的方式 | string  |   line-by-line，side-by-side    |    line-by-line     |
 | drawFileList | 展示对比文件列表 | boolean | - | false |
 | renderNothingWhenEmpty | 当无对比时不渲染 | boolean | - | false |
+| diffStyle | 差异风格, 单词级差异或字母级差异 | string | word, char | word |
 | fileName | 文件名 | string | - | - |
 | isShowNoChange | 当无对比时展示源代码 | boolean | - | false |
 
@@ -141,6 +142,11 @@ export default {
 - [x] 更快的渲染速度(使用了异步渲染，不阻塞ui)
 
 # 变更记录
+
+### 0.3.0
+
+1. 性能优化，现在渲染拥有更好的性能
+2. 添加 Prop `diffStyle` 来控制是否显示单词级差异还是字母级差异
 
 ### 0.2.1
 

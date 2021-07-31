@@ -13,12 +13,10 @@ type Props = Readonly<{
   renderNothingWhenEmpty: boolean
   fileName: string
   isShowNoChange: boolean
+  diffStyle: 'word' | 'char'
 } & {}>
 
 export const createHtml = (props: Props) => {
-  function wrapCode (html) {
-    return html.replace(/<span class="d2h-code-line-ctn">(.+?)<\/span>/g, '<span class="d2h-code-line-ctn"><code>$1</code></span>')
-  }
   let oldString = props.oldString
   let newString = props.newString
   if (props.isShowNoChange) {
@@ -26,19 +24,19 @@ export const createHtml = (props: Props) => {
     newString = 'File Without Change\tNewString: ======================== \n' + newString
   }
   const dd = createPatch(props.fileName, oldString, newString, '', '', { context: props.context })
-  const html = d2h.html(dd, {
+  return d2h.html(dd, {
     outputFormat: props.outputFormat,
     drawFileList: props.drawFileList,
     matching: 'lines',
+    diffStyle: props.diffStyle,
     renderNothingWhenEmpty: props.renderNothingWhenEmpty
   })
-  return wrapCode(html)
 }
 
-async function listElements (): Promise<Element[]> {
+async function listElements (element: Element): Promise<Element[]> {
   return new Promise(resolve => {
     setTimeout(() => {
-      const elements = document.querySelectorAll('.d2h-wrapper .d2h-code-line-ctn')
+      const elements = element.querySelectorAll('.d2h-wrapper .d2h-code-line-ctn')
       resolve(Array.from(elements))
     }, 0)
   })
@@ -53,9 +51,9 @@ async function highlightElement (el: Element): Promise<boolean> {
   })
 }
 
-export async function highlightElements (props, ctx: SetupContext<any>) {
+export async function highlightElements (element: Element, props, ctx: SetupContext<any>) {
   ctx.emit('before-render')
-  const elements = await listElements()
+  const elements = await listElements(element)
   const promises = Array.from(elements).map(el => highlightElement(el))
   await Promise.all(promises)
   ctx.emit('after-render')

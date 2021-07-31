@@ -1,10 +1,27 @@
-import { computed, defineComponent, onMounted, onUpdated, PropType } from 'vue-demi'
+import {
+  computed,
+  defineComponent,
+  DirectiveArguments,
+  isVue3,
+  PropType,
+  resolveDirective,
+  withDirectives,
+  h
+} from 'vue-demi'
 import { createHtml, highlightElements } from '@/lib/v-code-diff/util'
-import h from '@/lib/v-code-diff/h-demi'
 import './styles'
 
 export default defineComponent({
   name: 'CodeDiff',
+  directives: {
+    highlight: async function (el, binding) {
+      const props = binding.value.props
+      const ctx = binding.value.ctx
+      if (props.highlight) {
+        await highlightElements(el, props, ctx)
+      }
+    }
+  },
   props: {
     highlight: {
       type: Boolean,
@@ -34,10 +51,10 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    // diffStyle: {
-    //   type: String,
-    //   default: 'word'
-    // },
+    diffStyle: {
+      type: String as PropType<'word' | 'char'>,
+      default: 'word'
+    },
     fileName: {
       type: String,
       default: ''
@@ -49,27 +66,34 @@ export default defineComponent({
   },
   emits: ['before-render', 'after-render'],
   setup (props, ctx) {
-    const html = computed(() => createHtml(props)
-    )
-    onMounted(() => {
-      if (props.highlight) {
-        highlightElements(props, ctx)
-      }
-    })
-    onUpdated(() => {
-      if (props.highlight) {
-        highlightElements(props, ctx)
-      }
-    })
+    const html = computed(() => createHtml(props))
     return {
-      html
+      html,
+      props,
+      ctx
     }
   },
   render () {
-    return h('div', {
-      domProps: {
+    const directiveValue = { props: this.props, ctx: this.ctx }
+    if (isVue3) {
+      const highlight = resolveDirective('highlight')
+      return withDirectives(h('div', {
         innerHTML: this.html
-      }
-    })
+      }), <DirectiveArguments>[
+        [highlight, directiveValue]
+      ])
+    } else {
+      return h('div', {
+        domProps: {
+          innerHTML: this.html
+        },
+        directives: [
+          {
+            name: 'highlight',
+            value: directiveValue
+          }
+        ]
+      })
+    }
   }
 })

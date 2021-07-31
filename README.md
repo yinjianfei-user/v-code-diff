@@ -131,6 +131,7 @@ export default {
 | outputFormat| show method | string  |   line-by-line，side-by-side    |    line-by-line     |
 | drawFileList | show files list | boolean | - | false |
 | renderNothingWhenEmpty | render nothing when empty | boolean | - | false |
+| diffStyle | difference style | string | word, char | word |
 | fileName | file name | string | - |  |
 | isShowNoChange | show raw when no change | boolean | - | false |
 
@@ -145,6 +146,11 @@ export default {
 - [x] faster render
 
 # ChangeLog
+
+### 0.3.0
+
+1. Performance optimization, now rendering has better performance
+2. Add Prop `diffStyle` to control whether to display word-level differences or char-level differences
 
 ### 0.2.1
 
