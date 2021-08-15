@@ -147,6 +147,10 @@ export default {
 
 # ChangeLog
 
+### 0.3.1
+
+1. Fix incorrect style when comparing text
+
 ### 0.3.0
 
 1. Performance optimization, now rendering has better performance
