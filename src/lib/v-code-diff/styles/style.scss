@@ -2,10 +2,7 @@
   position: relative;
   line-height: normal;
   .d2h-files-diff {
-    position: relative;
-    > .d2h-file-side-diff ~ .d2h-file-side-diff {
-      //position: absolute;
-    }
+    display: flex;
   }
   .d2h-file-side-diff {
     margin-bottom: -5px;
@@ -20,8 +17,17 @@
   .d2h-code-side-line .d2h-info {
     height: 18px;
   }
+  .d2h-cntx,
+  .d2h-del,
+  .d2h-ins {
+    height: 18px;
+  }
   .d2h-code-linenumber,
   .d2h-code-side-linenumber {
-    height: 19px;
+    line-height: 20px;
+    height: 20px;
+  }
+  tr {
+    height: 20px;
   }
 }
