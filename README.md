@@ -147,6 +147,10 @@ export default {
 
 # ChangeLog
 
+### 0.3.2
+
+1. Fixed the warning for vue2 users in console
+
 ### 0.3.1
 
 1. Fix incorrect style when comparing text

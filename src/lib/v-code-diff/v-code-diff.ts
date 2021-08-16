@@ -1,27 +1,9 @@
-import {
-  computed,
-  defineComponent,
-  DirectiveArguments,
-  isVue3,
-  PropType,
-  resolveDirective,
-  withDirectives,
-  h
-} from 'vue-demi'
-import { createHtml, highlightElements } from '@/lib/v-code-diff/util'
+import { defineComponent, isVue3, PropType, h, ref, watch } from 'vue-demi'
+import { createHtml, highlightElements, useDebounceFn } from '@/lib/v-code-diff/util'
 import './styles'
 
 export default defineComponent({
   name: 'CodeDiff',
-  directives: {
-    highlight: async function (el, binding) {
-      const props = binding.value.props
-      const ctx = binding.value.ctx
-      if (props.highlight) {
-        await highlightElements(el, props, ctx)
-      }
-    }
-  },
   props: {
     highlight: {
       type: Boolean,
@@ -66,33 +48,29 @@ export default defineComponent({
   },
   emits: ['before-render', 'after-render'],
   setup (props, ctx) {
-    const html = computed(() => createHtml(props))
+    let html = ref(createHtml(props))
+    const cb = useDebounceFn(async () => {
+      html.value = createHtml(props)
+      const el = document.createElement('div')
+      el.innerHTML = html.value
+      await highlightElements(el, props, ctx)
+      html.value = el.innerHTML
+    }, 200)
+    watch(props, cb, { deep: true, immediate: true })
     return {
-      html,
-      props,
-      ctx
+      html
     }
   },
   render () {
-    const directiveValue = { props: this.props, ctx: this.ctx }
     if (isVue3) {
-      const highlight = resolveDirective('highlight')
-      return withDirectives(h('div', {
+      return h('div', {
         innerHTML: this.html
-      }), <DirectiveArguments>[
-        [highlight, directiveValue]
-      ])
+      })
     } else {
       return h('div', {
         domProps: {
           innerHTML: this.html
-        },
-        directives: [
-          {
-            name: 'highlight',
-            value: directiveValue
-          }
-        ]
+        }
       })
     }
   }

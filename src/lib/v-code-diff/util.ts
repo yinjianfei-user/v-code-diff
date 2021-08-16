@@ -16,6 +16,18 @@ type Props = Readonly<{
   diffStyle: 'word' | 'char'
 } & {}>
 
+export function useDebounceFn (fn, delay) {
+  let timer
+  return function () {
+    const context = this
+    const args = arguments
+    clearTimeout(timer)
+    timer = setTimeout(function () {
+      fn.apply(context, args)
+    }, delay)
+  }
+}
+
 export const createHtml = (props: Props) => {
   let oldString = props.oldString
   let newString = props.newString
