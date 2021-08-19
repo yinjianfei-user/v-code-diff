@@ -48,13 +48,15 @@ export default defineComponent({
   },
   emits: ['before-render', 'after-render'],
   setup (props, ctx) {
-    let html = ref(createHtml(props))
+    const html = ref(createHtml(props))
     const cb = useDebounceFn(async () => {
       html.value = createHtml(props)
-      const el = document.createElement('div')
-      el.innerHTML = html.value
-      await highlightElements(el, props, ctx)
-      html.value = el.innerHTML
+      if (props.highlight) {
+        const el = document.createElement('div')
+        el.innerHTML = html.value
+        await highlightElements(el, props, ctx)
+        html.value = el.innerHTML
+      }
     }, 200)
     watch(props, cb, { deep: true, immediate: true })
     return {

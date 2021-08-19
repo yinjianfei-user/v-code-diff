@@ -147,6 +147,10 @@ export default {
 
 # ChangeLog
 
+### 0.3.3
+
+1. Fixed the problem of highlight failure.
+
 ### 0.3.2
 
 1. Fixed the warning for vue2 users in console
