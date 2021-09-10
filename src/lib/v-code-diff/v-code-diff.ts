@@ -44,6 +44,10 @@ export default defineComponent({
     isShowNoChange: {
       type: Boolean,
       default: false
+    },
+    trim: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['before-render', 'after-render'],

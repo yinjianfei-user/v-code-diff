@@ -134,6 +134,7 @@ export default {
 | diffStyle | difference style | string | word, char | word |
 | fileName | file name | string | - |  |
 | isShowNoChange | show raw when no change | boolean | - | false |
+| trim | Remove blank characters before and after the string | boolean | - | false |
 
 # Difference from [vue-code-diff](https://github.com/ddchef/vue-code-diff)
 
@@ -146,6 +147,10 @@ export default {
 - [x] faster render
 
 # ChangeLog
+
+### 0.3.4
+
+1. Add Prop `trim`, it will remove the blank characters before and after the string
 
 ### 0.3.3
 

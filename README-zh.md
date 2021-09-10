@@ -130,6 +130,7 @@ export default {
 | diffStyle | 差异风格, 单词级差异或字母级差异 | string | word, char | word |
 | fileName | 文件名 | string | - | - |
 | isShowNoChange | 当无对比时展示源代码 | boolean | - | false |
+| trim | 移除字符串前后空白字符 | boolean | - | false |
 
 # 与 vue-code-diff 的不同
 
@@ -142,6 +143,10 @@ export default {
 - [x] 更快的渲染速度(使用了异步渲染，不阻塞ui)
 
 # 变更记录
+
+### 0.3.4
+
+1. 增加 Prop `trim`, 可以移除字符串前后空白字符
 
 ### 0.3.3
 

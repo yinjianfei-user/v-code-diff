@@ -36,6 +36,9 @@
     <a-form-item label="内容无变化时显示源代码(isShowNoChange)">
       <a-switch v-model:checked="formState.isShowNoChange" />
     </a-form-item>
+    <a-form-item label="移除字符串前后空白字符(trim)">
+      <a-switch v-model:checked="formState.trim" />
+    </a-form-item>
     <a-form-item>
       <a-button type="link" @click="resetText">重置文本(reset text)</a-button>
     </a-form-item>
@@ -50,6 +53,7 @@
     :draw-file-list="formState.drawFileList"
     :render-nothing-when-empty="formState.renderNothingWhenEmpty"
     :is-show-no-change="formState.isShowNoChange"
+    :trim="formState.trim"
     @before-render="renderStart"
     @after-render="renderEnd" />
 </template>
@@ -79,7 +83,8 @@ export default defineComponent({
       diffStyle: 'word',
       drawFileList: true,
       renderNothingWhenEmpty: false,
-      isShowNoChange: false
+      isShowNoChange: false,
+      trim: false
     })
     const renderStart = () => {
       console.log('render start: ' + new Date().toLocaleString())
