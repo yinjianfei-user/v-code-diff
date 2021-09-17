@@ -42,6 +42,9 @@
     <a-form-item>
       <a-button type="link" @click="resetText">重置文本(reset text)</a-button>
     </a-form-item>
+    <a-form-item>
+      <a-button type="link" @click="clearText">清空文本(clear text)</a-button>
+    </a-form-item>
   </a-form>
   <code-diff
     :old-string="oldString"
@@ -98,6 +101,12 @@ export default defineComponent({
       oldString.value = oldShortText.value
       newString.value = newShortText.value
     }
+    const clearText = () => {
+      localStorage.removeItem('oldString')
+      localStorage.removeItem('newString')
+      oldString.value = ''
+      newString.value = ''
+    }
     watch(oldString, () => localStorage.setItem('oldString', oldString.value))
     watch(newString, () => localStorage.setItem('newString', newString.value))
     return {
@@ -106,7 +115,8 @@ export default defineComponent({
       newString,
       renderStart,
       renderEnd,
-      resetText
+      resetText,
+      clearText
     }
   }
 })
