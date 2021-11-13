@@ -142,11 +142,11 @@ export default {
 * Smaller package size
 * Faster rendering speed
 
-# Todo
-
-- [x] faster render
-
 # ChangeLog
+
+### 0.3.5
+
+1. In the side-by-side mode, support left and right synchronous scrolling
 
 ### 0.3.4
 
