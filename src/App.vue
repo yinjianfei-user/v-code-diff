@@ -47,6 +47,7 @@
     </a-form-item>
   </a-form>
   <code-diff
+    :highlight="true"
     :old-string="oldString"
     :new-string="newString"
     :context="formState.context"

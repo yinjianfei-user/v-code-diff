@@ -71,3 +71,23 @@ export async function highlightElements (element: Element, props, ctx: SetupCont
   await Promise.all(promises)
   ctx.emit('after-render')
 }
+
+export function syncScroll (selector) {
+  let active: HTMLElement = document.createElement('div')
+  document.querySelectorAll(selector).forEach(function (element) {
+    element.addEventListener('mouseenter', function (e) {
+      active = e.target
+    })
+
+    element.addEventListener('scroll', function (e) {
+      if (e.target !== active) return
+
+      document.querySelectorAll(selector).forEach(function (target) {
+        if (active === target) return
+
+        target.scrollTop = active.scrollTop
+        target.scrollLeft = active.scrollLeft
+      })
+    })
+  })
+}
