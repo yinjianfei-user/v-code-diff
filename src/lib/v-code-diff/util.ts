@@ -15,6 +15,7 @@ type Props = Readonly<{
   isShowNoChange: boolean
   diffStyle: 'word' | 'char'
   trim: boolean
+  language: string
 } & {}>
 
 export function useDebounceFn (fn, delay) {
@@ -55,10 +56,15 @@ async function listElements (element: Element): Promise<Element[]> {
   })
 }
 
-async function highlightElement (el: Element): Promise<boolean> {
+async function highlightElement (el: HTMLElement, language: string): Promise<boolean> {
   return new Promise(resolve => {
     setTimeout(() => {
-      hljs.highlightElement(<HTMLElement>el)
+      if (language) {
+        const text = el.innerText
+        el.innerHTML = hljs.highlight(text, { language: language }).value
+      } else {
+        hljs.highlightElement(<HTMLElement>el)
+      }
       resolve(true)
     }, 0)
   })
@@ -67,7 +73,7 @@ async function highlightElement (el: Element): Promise<boolean> {
 export async function highlightElements (element: Element, props, ctx: SetupContext<any>) {
   ctx.emit('before-render')
   const elements = await listElements(element)
-  const promises = Array.from(elements).map(el => highlightElement(el))
+  const promises = Array.from(elements).map(el => highlightElement(el as HTMLElement, props.language))
   await Promise.all(promises)
   ctx.emit('after-render')
 }

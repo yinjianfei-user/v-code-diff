@@ -48,6 +48,10 @@ export default defineComponent({
     trim: {
       type: Boolean,
       default: false
+    },
+    language: {
+      type: String,
+      default: ''
     }
   },
   emits: ['before-render', 'after-render'],

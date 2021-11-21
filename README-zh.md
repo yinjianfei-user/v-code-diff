@@ -121,6 +121,7 @@ export default {
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | highlight | 控制是否高亮代码| boolean  |   -    |    true     |
+| language | 代码语言，如 `typescript`。不填会自动判断。 [查看全部支持语言](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md)| string  |   -    |    -     |
 | old-string| 陈旧的字符串| string  |   -    |    -     |
 | new-string| 新的字符串| string  |   -    |    -     |
 | context| 不同地方上下间隔多少行不隐藏 | number  |   -    |    -     |

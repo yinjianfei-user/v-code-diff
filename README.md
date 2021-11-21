@@ -126,10 +126,11 @@ export default {
 
 | Prop      | Description    | Type      | Optional       | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| highlight| control whether to highlight the code | boolean  |   —    |    true     |
-| old-string| old string | string  |   —    |    —     |
-| new-string| new string| string  |   —    |    —     |
-| context| number of show context lines | number  |   —    |    —     |
+| highlight| control whether to highlight the code | boolean  |   -    |    true     |
+| language| code language，such as `typescript`. If you don't input, it will be judged automatically. [view all supported languages](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md)  | string  |   -    |   -     |
+| old-string| old string | string  |   -    |    -     |
+| new-string| new string| string  |   -    |    -     |
+| context| number of show context lines | number  |   -    |    -     |
 | outputFormat| show method | string  |   line-by-line，side-by-side    |    line-by-line     |
 | drawFileList | show files list | boolean | - | false |
 | renderNothingWhenEmpty | render nothing when empty | boolean | - | false |
@@ -145,6 +146,10 @@ export default {
 * Faster rendering speed
 
 # ChangeLog
+
+### 0.3.6
+
+1. Add prop `language`, make highlighting more accurate
 
 ### 0.3.5
 
