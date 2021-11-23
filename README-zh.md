@@ -141,6 +141,14 @@ export default {
 
 # 变更记录
 
+### 0.3.7
+
+1. 修复当 isShowNoChange 为 true 时，而新旧代码不同时仍展示 “File Without Change” 的问题。然后展示全部源代码
+
+### 0.3.6
+
+1. 添加 prop `language`，能让高亮更准确
+
 ### 0.3.5
 
 1. side-by-side 模式中，支持左右同步滚动

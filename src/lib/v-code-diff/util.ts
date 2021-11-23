@@ -33,11 +33,13 @@ export function useDebounceFn (fn, delay) {
 export const createHtml = (props: Props) => {
   let oldString = props.trim ? props.oldString.trim() : props.oldString
   let newString = props.trim ? props.newString.trim() : props.newString
-  if (props.isShowNoChange) {
+  let context = props.context
+  if (props.isShowNoChange && oldString === newString) {
     oldString = 'File Without Change\tOldString: ======================== \n' + oldString
     newString = 'File Without Change\tNewString: ======================== \n' + newString
+    context = 99999
   }
-  const dd = createPatch(props.fileName, oldString, newString, '', '', { context: props.context })
+  const dd = createPatch(props.fileName, oldString, newString, '', '', { context: context })
   return d2h.html(dd, {
     outputFormat: props.outputFormat,
     drawFileList: props.drawFileList,

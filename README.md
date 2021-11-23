@@ -147,6 +147,11 @@ export default {
 
 # ChangeLog
 
+### 0.3.7
+
+1. Fix the problem of displaying "File Without Change..." when isShowNoChange is true and the old and new codes are different,
+then show all the source code
+
 ### 0.3.6
 
 1. Add prop `language`, make highlighting more accurate
