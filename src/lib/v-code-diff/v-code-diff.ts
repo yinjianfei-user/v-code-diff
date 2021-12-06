@@ -52,6 +52,10 @@ export default defineComponent({
     language: {
       type: String,
       default: ''
+    },
+    noDiffLineFeed: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['before-render', 'after-render'],

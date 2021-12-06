@@ -138,6 +138,8 @@ export default {
 | fileName | file name | string | - |  |
 | isShowNoChange | show raw when no change | boolean | - | false |
 | trim | Remove blank characters before and after the string | boolean | - | false |
+| language | code language | boolean | - | false |
+| noDiffLineFeed | Do not diff windows line feed (CRLF) and linux line feed (LF)  | boolean | - | false |
 
 # Difference from [vue-code-diff](https://github.com/ddchef/vue-code-diff)
 
@@ -146,6 +148,11 @@ export default {
 * Faster rendering speed
 
 # ChangeLog
+
+### 0.3.8
+
+1. Style adjustment, hide css `d2h-file-header`, same as vue-code-diff
+2. Add prop `noDiffLineFeed`, do not diff windows line feed (CRLF) and linux line feed (LF)
 
 ### 0.3.7
 

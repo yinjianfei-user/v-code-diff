@@ -39,6 +39,9 @@
     <a-form-item label="移除字符串前后空白字符(trim)">
       <a-switch v-model:checked="formState.trim" />
     </a-form-item>
+    <a-form-item label="不 diff 换行符(noDiffLineFeed)">
+      <a-switch v-model:checked="formState.noDiffLineFeed" />
+    </a-form-item>
     <a-form-item>
       <a-button type="link" @click="resetText">重置文本(reset text)</a-button>
     </a-form-item>
@@ -58,6 +61,7 @@
     :render-nothing-when-empty="formState.renderNothingWhenEmpty"
     :is-show-no-change="formState.isShowNoChange"
     :trim="formState.trim"
+    :no-diff-line-feed="formState.noDiffLineFeed"
     @before-render="renderStart"
     @after-render="renderEnd" />
 </template>
@@ -88,7 +92,8 @@ export default defineComponent({
       drawFileList: true,
       renderNothingWhenEmpty: false,
       isShowNoChange: false,
-      trim: false
+      trim: false,
+      noDiffLineFeed: false
     })
     const renderStart = () => {
       console.log('render start: ' + new Date().toLocaleString())

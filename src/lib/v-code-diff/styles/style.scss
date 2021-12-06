@@ -1,6 +1,9 @@
 .d2h-wrapper {
   position: relative;
   line-height: normal;
+  .d2h-file-header {
+    display: none;
+  }
   .d2h-files-diff {
     display: flex;
   }

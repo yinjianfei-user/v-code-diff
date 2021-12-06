@@ -16,6 +16,7 @@ type Props = Readonly<{
   diffStyle: 'word' | 'char'
   trim: boolean
   language: string
+  noDiffLineFeed: boolean
 } & {}>
 
 export function useDebounceFn (fn, delay) {
@@ -33,6 +34,8 @@ export function useDebounceFn (fn, delay) {
 export const createHtml = (props: Props) => {
   let oldString = props.trim ? props.oldString.trim() : props.oldString
   let newString = props.trim ? props.newString.trim() : props.newString
+  oldString = props.noDiffLineFeed ? oldString.replace(/(\r\n)/g, '\n') : oldString
+  newString = props.noDiffLineFeed ? newString.replace(/(\r\n)/g, '\n') : newString
   let context = props.context
   if (props.isShowNoChange && oldString === newString) {
     oldString = 'File Without Change\tOldString: ======================== \n' + oldString

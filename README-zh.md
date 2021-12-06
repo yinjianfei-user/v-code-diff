@@ -132,6 +132,8 @@ export default {
 | fileName | 文件名 | string | - | - |
 | isShowNoChange | 当无对比时展示源代码 | boolean | - | false |
 | trim | 移除字符串前后空白字符 | boolean | - | false |
+| language | 对比的文本语言 | boolean | - | false |
+| noDiffLineFeed | 不 diff windows 换行符(CRLF)与 linux 换行符(LF)  | boolean | - | false |
 
 # 与 vue-code-diff 的不同
 
@@ -140,6 +142,11 @@ export default {
 * 更快的渲染速度
 
 # 变更记录
+
+### 0.3.8
+
+1. 样式调整，隐藏 css `d2h-file-header`，对齐 vue-code-diff 
+2. 添加 prop `noDiffLineFeed`，不 diff windows 换行符(CRLF)与 linux 换行符(LF) 
 
 ### 0.3.7
 
