@@ -149,6 +149,10 @@ export default {
 
 # ChangeLog
 
+### 0.3.9
+
+1. Make the imported highlight.js style take effect only in `.d2h-wrapper` div
+
 ### 0.3.8
 
 1. Style adjustment, hide css `d2h-file-header`, same as vue-code-diff

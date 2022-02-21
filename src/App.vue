@@ -7,6 +7,9 @@
     style="margin: 10px;"
     layout="inline"
     :model="formState">
+    <a-form-item label="是否高亮(highlight)">
+      <a-switch v-model:checked="formState.highlight" />
+    </a-form-item>
     <a-form-item label="文件名(filename)">
       <a-input v-model:value="formState.filename" placeholder="请输入文件名" />
     </a-form-item>
@@ -50,7 +53,7 @@
     </a-form-item>
   </a-form>
   <code-diff
-    :highlight="true"
+    :highlight="formState.highlight"
     :old-string="oldString"
     :new-string="newString"
     :context="formState.context"
@@ -85,6 +88,7 @@ export default defineComponent({
       newString.value = localStorage.getItem('newString')
     }
     const formState = reactive({
+      highlight: false,
       filename: 'package.json',
       context: 10,
       outputFormat: 'side-by-side',

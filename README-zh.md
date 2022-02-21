@@ -143,6 +143,10 @@ export default {
 
 # 变更记录
 
+### 0.3.9
+
+1. 调整 css，让引入的 highlight.js 的样式只在 .d2h-wrapper 内生效
+
 ### 0.3.8
 
 1. 样式调整，隐藏 css `d2h-file-header`，对齐 vue-code-diff 
