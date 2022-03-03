@@ -32,7 +32,6 @@ export default [{
       file: 'dist/v-code-diff.umd.js',
       format: 'umd',
       globals: {
-        'katex': 'katex',
         'vue': 'vue',
         'vue-demi': 'VueDemi'
       },

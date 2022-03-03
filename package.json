@@ -1,7 +1,7 @@
 {
   "name": "v-code-diff",
   "description": "A diff plugin of vue, support vue2 and vue3",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "scripts": {
     "dev": "vite",
     "build": "npx rimraf dist && rollup --config rollup.config.js",

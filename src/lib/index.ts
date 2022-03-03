@@ -1,10 +1,10 @@
-import { App } from 'vue-demi'
+import { Plugin } from 'vue-demi'
 import CodeDiff from './v-code-diff'
 
 const components = [
   CodeDiff
 ]
-const install = (app: App) => {
+const install = (app) => {
   components.forEach(component => {
     app.component(component.name, component)
   })
@@ -15,4 +15,4 @@ export {
   CodeDiff
 }
 
-export default { install }
+export default { install } as Plugin
