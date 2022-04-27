@@ -32,8 +32,8 @@ import {createApp} from 'vue'
 import CodeDiff from 'v-code-diff'
 
 app
-    .use(CodeDiff)
-    .mount('#app')
+  .use(CodeDiff)
+  .mount('#app')
 ```
 
 然后
@@ -111,29 +111,30 @@ export default {
 
 # 事件
 
-| 事件名称      | 说明    | 回调参数     |
-|---------- |-------- |---------- |
-| before-render | 渲染前触发 | -  |
-| after-render | 渲染后触发 | -  |
+| 事件名称          | 说明      | 回调参数     |
+|---------------|---------|---------- |
+| before-render | 渲染前触发   | -  |
+| after-render  | 渲染后触发   | -  |
 
 # 参数
 
-| 参数      | 说明    | 类型      | 可选值       | 默认值   |
-|---------- |-------- |---------- |-------------  |-------- |
-| highlight | 控制是否高亮代码| boolean  |   -    |    true     |
-| language | 代码语言，如 `typescript`。不填会自动判断。 [查看全部支持语言](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md)| string  |   -    |    -     |
-| old-string| 陈旧的字符串| string  |   -    |    -     |
-| new-string| 新的字符串| string  |   -    |    -     |
-| context| 不同地方上下间隔多少行不隐藏 | number  |   -    |    -     |
-| outputFormat| 展示的方式 | string  |   line-by-line，side-by-side    |    line-by-line     |
-| drawFileList | 展示对比文件列表 | boolean | - | false |
-| renderNothingWhenEmpty | 当无对比时不渲染 | boolean | - | false |
-| diffStyle | 差异风格, 单词级差异或字母级差异 | string | word, char | word |
-| fileName | 文件名 | string | - | - |
-| isShowNoChange | 当无对比时展示源代码 | boolean | - | false |
-| trim | 移除字符串前后空白字符 | boolean | - | false |
-| language | 对比的文本语言 | boolean | - | false |
-| noDiffLineFeed | 不 diff windows 换行符(CRLF)与 linux 换行符(LF)  | boolean | - | false |
+| 参数                     | 说明                                                                                                                    | 类型      | 可选值       | 默认值          |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------|---------- |-------------  |--------------|
+| highlight              | 控制是否高亮代码                                                                                                              | boolean  |   -    | true         |
+| language               | 代码语言，如 `typescript`。不填会自动判断。 [查看全部支持语言](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) | string  |   -    | -            |
+| old-string             | 陈旧的字符串                                                                                                                | string  |   -    | -            |
+| new-string             | 新的字符串                                                                                                                 | string  |   -    | -            |
+| context                | 不同地方上下间隔多少行不隐藏                                                                                                        | number  |   -    | -            |
+| outputFormat           | 展示的方式                                                                                                                 | string  |   line-by-line，side-by-side    | line-by-line |
+| drawFileList           | 展示对比文件列表                                                                                                              | boolean | - | false        |
+| renderNothingWhenEmpty | 当无对比时不渲染                                                                                                              | boolean | - | false        |
+| diffStyle              | 差异风格, 单词级差异或字母级差异                                                                                                     | string | word, char | word         |
+| fileName               | 文件名                                                                                                                   | string | - | -            |
+| isShowNoChange         | 当无对比时展示源代码                                                                                                            | boolean | - | false        |
+| trim                   | 移除字符串前后空白字符                                                                                                           | boolean | - | false        |
+| language               | 对比的文本语言                                                                                                               | boolean | - | false        |
+| noDiffLineFeed         | 不 diff windows 换行符(CRLF)与 linux 换行符(LF)                                                                               | boolean | - | false        |
+| syncScroll             | 是否同步滚动                                                                                                                | boolean | - | true         |
 
 # 与 vue-code-diff 的不同
 
@@ -143,14 +144,22 @@ export default {
 
 # 变更记录
 
+### 0.3.11
+
+1. 增加 prop `syncScroll` 用于控制横向滚动条是否同步滚动
+
+### 0.3.10
+
+1. 修复了导出时的类型错误
+
 ### 0.3.9
 
 1. 调整 css，让引入的 highlight.js 的样式只在 .d2h-wrapper 内生效
 
 ### 0.3.8
 
-1. 样式调整，隐藏 css `d2h-file-header`，对齐 vue-code-diff 
-2. 添加 prop `noDiffLineFeed`，不 diff windows 换行符(CRLF)与 linux 换行符(LF) 
+1. 样式调整，隐藏 css `d2h-file-header`，对齐 vue-code-diff
+2. 添加 prop `noDiffLineFeed`，不 diff windows 换行符(CRLF)与 linux 换行符(LF)
 
 ### 0.3.7
 

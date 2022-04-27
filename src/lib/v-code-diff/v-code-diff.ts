@@ -1,5 +1,5 @@
 import { defineComponent, isVue3, PropType, h, ref, watch, onUpdated, onMounted } from 'vue-demi'
-import { createHtml, highlightElements, syncScroll, useDebounceFn } from '@/lib/v-code-diff/util'
+import { createHtml, highlightElements, useDebounceFn, useSyncScroll } from '@/lib/v-code-diff/util'
 import './styles'
 
 export default defineComponent({
@@ -56,6 +56,10 @@ export default defineComponent({
     noDiffLineFeed: {
       type: Boolean,
       default: false
+    },
+    syncScroll: {
+      type: Boolean,
+      default: true
     }
   },
   emits: ['before-render', 'after-render'],
@@ -71,16 +75,19 @@ export default defineComponent({
       }
     }, 200)
     watch(props, cb, { deep: true, immediate: true })
+
+    const { addSyncScroll, removeSyncScroll } = useSyncScroll('.d2h-file-side-diff')
+    watch(() => props.syncScroll, (newVal, oldVal) => {
+      removeSyncScroll()
+      if (newVal) {
+        addSyncScroll()
+      }
+    })
+
     onMounted(() => {
-      if (props.outputFormat === 'side-by-side') {
-        syncScroll('.d2h-file-side-diff')
-      }
+      addSyncScroll()
     })
-    onUpdated(() => {
-      if (props.outputFormat === 'side-by-side') {
-        syncScroll('.d2h-file-side-diff')
-      }
-    })
+
     return {
       html
     }

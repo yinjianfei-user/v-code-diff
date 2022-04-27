@@ -83,22 +83,40 @@ export async function highlightElements (element: Element, props, ctx: SetupCont
   ctx.emit('after-render')
 }
 
-export function syncScroll (selector) {
+export function useSyncScroll (selector) {
   let active: HTMLElement = document.createElement('div')
-  document.querySelectorAll(selector).forEach(function (element) {
-    element.addEventListener('mouseenter', function (e) {
-      active = e.target
+
+  function onScroll (e) {
+    if (e.target !== active) return
+
+    document.querySelectorAll(selector).forEach(function (target) {
+      if (active === target) return
+
+      target.scrollTop = active.scrollTop
+      target.scrollLeft = active.scrollLeft
     })
+  }
 
-    element.addEventListener('scroll', function (e) {
-      if (e.target !== active) return
+  function onMouseenter (e) {
+    active = e.target
+  }
 
-      document.querySelectorAll(selector).forEach(function (target) {
-        if (active === target) return
-
-        target.scrollTop = active.scrollTop
-        target.scrollLeft = active.scrollLeft
-      })
+  function addSyncScroll () {
+    document.querySelectorAll(selector).forEach(function (element) {
+      element.addEventListener('mouseenter', onMouseenter)
+      element.addEventListener('scroll', onScroll)
     })
-  })
+  }
+
+  function removeSyncScroll () {
+    document.querySelectorAll(selector).forEach(function (element) {
+      element.removeEventListener('mouseenter', onMouseenter)
+      element.removeEventListener('scroll', onScroll)
+    })
+  }
+
+  return {
+    addSyncScroll,
+    removeSyncScroll
+  }
 }

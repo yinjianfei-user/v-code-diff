@@ -45,6 +45,9 @@
     <a-form-item label="不 diff 换行符(noDiffLineFeed)">
       <a-switch v-model:checked="formState.noDiffLineFeed" />
     </a-form-item>
+    <a-form-item label="同步滚动(syncScroll)">
+      <a-switch v-model:checked="formState.syncScroll" />
+    </a-form-item>
     <a-form-item>
       <a-button type="link" @click="resetText">重置文本(reset text)</a-button>
     </a-form-item>
@@ -65,6 +68,7 @@
     :is-show-no-change="formState.isShowNoChange"
     :trim="formState.trim"
     :no-diff-line-feed="formState.noDiffLineFeed"
+    :sync-scroll="formState.syncScroll"
     @before-render="renderStart"
     @after-render="renderEnd" />
 </template>
@@ -97,7 +101,8 @@ export default defineComponent({
       renderNothingWhenEmpty: false,
       isShowNoChange: false,
       trim: false,
-      noDiffLineFeed: false
+      noDiffLineFeed: false,
+      syncScroll: true
     })
     const renderStart = () => {
       console.log('render start: ' + new Date().toLocaleString())

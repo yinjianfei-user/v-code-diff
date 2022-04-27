@@ -149,6 +149,14 @@ export default {
 
 # ChangeLog
 
+### 0.3.11
+
+1. Add prop `syncScroll` to control whether the horizontal scroll bar needs to be scrolled synchronously
+
+### 0.3.10
+
+1. Fixed type error when exporting
+
 ### 0.3.9
 
 1. Make the imported highlight.js style take effect only in `.d2h-wrapper` div
