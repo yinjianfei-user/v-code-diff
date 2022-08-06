@@ -24,3 +24,4 @@ yarn-error.log*
 *.sw?
 
 /pages
+example/**/node_modules
