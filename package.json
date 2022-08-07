@@ -3,8 +3,11 @@
   "description": "A diff plugin of vue, support vue2 and vue3",
   "version": "0.3.11",
   "scripts": {
-    "dev": "vite",
+    "dev": "pnpm switch:3 && vite",
+    "dev:2": "pnpm switch:2 && cd ./dev/vue2.7 && pnpm dev",
     "build": "npx rimraf dist && rollup --config rollup.config.js",
+    "switch:3": "vue-demi-switch 3",
+    "switch:2": "vue-demi-switch 2.7 vue2",
     "serve": "vite preview",
     "commit": "git-cz",
     "gh-pages": "vite build --base=/v-code-diff/ && gh-pages -d ./pages"
@@ -59,7 +62,6 @@
     "@vitejs/plugin-legacy": "^1.5.3",
     "@vitejs/plugin-vue": "^1.6.2",
     "@vitejs/plugin-vue-jsx": "^1.1.8",
-    "@vue/compiler-sfc": "^3.2.11",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/eslint-config-typescript": "^4.0.0",
     "@vueuse/core": "^4.11.2",
@@ -89,6 +91,7 @@
     "vue": "^3.2.11",
     "vue-eslint-parser": "^7.11.0",
     "vue-tsc": "^0.3.0",
+    "vue2": "npm:vue@2",
     "yorkie": "^2.0.0"
   },
   "gitHooks": {
