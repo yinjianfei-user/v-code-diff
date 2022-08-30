@@ -73,68 +73,53 @@
     @after-render="renderEnd" />
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent, reactive, ref, watch } from 'vue-demi'
 import CodeDiff from './lib/v-code-diff/v-code-diff.ts'
 import { newShortText } from './new-short-text'
 import { oldShortText } from './old-short-text'
 
-export default defineComponent({
-  name: 'App',
-  components: { CodeDiff },
-  setup () {
-    const oldString = ref(oldShortText.value)
-    const newString = ref(newShortText.value)
-    if (localStorage.getItem('oldString')) {
-      oldString.value = localStorage.getItem('oldString')
-    }
-    if (localStorage.getItem('newString')) {
-      newString.value = localStorage.getItem('newString')
-    }
-    const formState = reactive({
-      highlight: false,
-      filename: 'package.json',
-      context: 10,
-      outputFormat: 'side-by-side',
-      diffStyle: 'word',
-      drawFileList: true,
-      renderNothingWhenEmpty: false,
-      isShowNoChange: false,
-      trim: false,
-      noDiffLineFeed: false,
-      syncScroll: true
-    })
-    const renderStart = () => {
-      console.log('render start: ' + new Date().toLocaleString())
-    }
-    const renderEnd = () => {
-      console.log('render end: ' + new Date().toLocaleString())
-    }
-    const resetText = () => {
-      localStorage.removeItem('oldString')
-      localStorage.removeItem('newString')
-      oldString.value = oldShortText.value
-      newString.value = newShortText.value
-    }
-    const clearText = () => {
-      localStorage.removeItem('oldString')
-      localStorage.removeItem('newString')
-      oldString.value = ''
-      newString.value = ''
-    }
-    watch(oldString, () => localStorage.setItem('oldString', oldString.value))
-    watch(newString, () => localStorage.setItem('newString', newString.value))
-    return {
-      formState,
-      oldString,
-      newString,
-      renderStart,
-      renderEnd,
-      resetText,
-      clearText
-    }
-  }
+const oldString = ref(oldShortText.value)
+const newString = ref(newShortText.value)
+if (localStorage.getItem('oldString')) {
+  oldString.value = localStorage.getItem('oldString')
+}
+if (localStorage.getItem('newString')) {
+  newString.value = localStorage.getItem('newString')
+}
+const formState = reactive({
+  highlight: false,
+  filename: 'package.json',
+  context: 10,
+  outputFormat: 'side-by-side',
+  diffStyle: 'word',
+  drawFileList: true,
+  renderNothingWhenEmpty: false,
+  isShowNoChange: false,
+  trim: false,
+  noDiffLineFeed: false,
+  syncScroll: true
 })
+const renderStart = () => {
+  console.log('render start: ' + new Date().toLocaleString())
+}
+const renderEnd = () => {
+  console.log('render end: ' + new Date().toLocaleString())
+}
+const resetText = () => {
+  localStorage.removeItem('oldString')
+  localStorage.removeItem('newString')
+  oldString.value = oldShortText.value
+  newString.value = newShortText.value
+}
+const clearText = () => {
+  localStorage.removeItem('oldString')
+  localStorage.removeItem('newString')
+  oldString.value = ''
+  newString.value = ''
+}
+watch(oldString, () => localStorage.setItem('oldString', oldString.value))
+watch(newString, () => localStorage.setItem('newString', newString.value))
 </script>
 
 <style>
