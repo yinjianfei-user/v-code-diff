@@ -1,7 +1,7 @@
 {
   "name": "v-code-diff",
   "description": "A diff plugin of vue, support vue2 and vue3",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "scripts": {
     "dev": "pnpm switch:3 && vite",
     "dev:2": "pnpm switch:2 && cd ./dev/vue2.7 && pnpm dev",
@@ -48,7 +48,7 @@
     "diff": "^5.0.0",
     "diff2html": "^3.4.5",
     "highlight.js": "^10.5.0",
-    "vue-demi": "latest"
+    "vue-demi": "^0.13.6"
   },
   "devDependencies": {
     "@ant-design-vue/use": "^0.0.1-alpha.10",

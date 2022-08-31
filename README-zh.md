@@ -1,6 +1,6 @@
 # VCodeDiff
 
-Vue2 / Vue3 可用的 code diff 插件  
+Vue2 / Vue3 可用的 code diff 插件
 是 [vue-code-diff](https://github.com/ddchef/vue-code-diff) 的 vue3 版本， 参考了大幅代码，在这里表示感谢
 
 # 如何安装？
@@ -111,30 +111,31 @@ export default {
 
 # 事件
 
-| 事件名称          | 说明      | 回调参数     |
-|---------------|---------|---------- |
-| before-render | 渲染前触发   | -  |
-| after-render  | 渲染后触发   | -  |
+
+| 事件名称      | 说明       | 回调参数 |
+| ------------- | ---------- | -------- |
+| before-render | 渲染前触发 | -        |
+| after-render  | 渲染后触发 | -        |
 
 # 参数
 
-| 参数                     | 说明                                                                                                                    | 类型      | 可选值       | 默认值          |
-|------------------------|-----------------------------------------------------------------------------------------------------------------------|---------- |-------------  |--------------|
-| highlight              | 控制是否高亮代码                                                                                                              | boolean  |   -    | true         |
-| language               | 代码语言，如 `typescript`。不填会自动判断。 [查看全部支持语言](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) | string  |   -    | -            |
-| old-string             | 陈旧的字符串                                                                                                                | string  |   -    | -            |
-| new-string             | 新的字符串                                                                                                                 | string  |   -    | -            |
-| context                | 不同地方上下间隔多少行不隐藏                                                                                                        | number  |   -    | -            |
-| outputFormat           | 展示的方式                                                                                                                 | string  |   line-by-line，side-by-side    | line-by-line |
-| drawFileList           | 展示对比文件列表                                                                                                              | boolean | - | false        |
-| renderNothingWhenEmpty | 当无对比时不渲染                                                                                                              | boolean | - | false        |
-| diffStyle              | 差异风格, 单词级差异或字母级差异                                                                                                     | string | word, char | word         |
-| fileName               | 文件名                                                                                                                   | string | - | -            |
-| isShowNoChange         | 当无对比时展示源代码                                                                                                            | boolean | - | false        |
-| trim                   | 移除字符串前后空白字符                                                                                                           | boolean | - | false        |
-| language               | 对比的文本语言                                                                                                               | boolean | - | false        |
-| noDiffLineFeed         | 不 diff windows 换行符(CRLF)与 linux 换行符(LF)                                                                               | boolean | - | false        |
-| syncScroll             | 是否同步滚动                                                                                                                | boolean | - | true         |
+
+| 参数                   | 说明                                                                                                                                        | 类型    | 可选值                     | 默认值       |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------- | -------------------------- | ------------ |
+| highlight              | 控制是否高亮代码                                                                                                                            | boolean | -                          | true         |
+| language               | 代码语言，如`typescript`。不填会自动判断。 [查看全部支持语言](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) | string  | -                          | -            |
+| old-string             | 陈旧的字符串                                                                                                                                | string  | -                          | -            |
+| new-string             | 新的字符串                                                                                                                                  | string  | -                          | -            |
+| context                | 不同地方上下间隔多少行不隐藏                                                                                                                | number  | -                          | -            |
+| outputFormat           | 展示的方式                                                                                                                                  | string  | line-by-line，side-by-side | line-by-line |
+| drawFileList           | 展示对比文件列表                                                                                                                            | boolean | -                          | false        |
+| renderNothingWhenEmpty | 当无对比时不渲染                                                                                                                            | boolean | -                          | false        |
+| diffStyle              | 差异风格, 单词级差异或字母级差异                                                                                                            | string  | word, char                 | word         |
+| fileName               | 文件名                                                                                                                                      | string  | -                          | -            |
+| isShowNoChange         | 当无对比时展示源代码                                                                                                                        | boolean | -                          | false        |
+| trim                   | 移除字符串前后空白字符                                                                                                                      | boolean | -                          | false        |
+| language               | 对比的文本语言                                                                                                                              | boolean | -                          | false        |
+| noDiffLineFeed         | 不 diff windows 换行符(CRLF)与 linux 换行符(LF)                                                                                             | boolean | -                          | false        |
 
 # 与 vue-code-diff 的不同
 
@@ -143,6 +144,10 @@ export default {
 * 更快的渲染速度
 
 # 变更记录
+
+### 0.3.12
+
+1. 撤销 prop `syncScroll` 因为有 bug。现在默认开启同步滚动
 
 ### 0.3.11
 

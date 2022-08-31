@@ -1,6 +1,6 @@
 # VCodeDiff
 
-[![NPM version](https://img.shields.io/npm/v/v-code-diff.svg?style=flat)](https://www.npmjs.com/package/v-code-diff) 
+[![NPM version](https://img.shields.io/npm/v/v-code-diff.svg?style=flat)](https://www.npmjs.com/package/v-code-diff)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Downloads](https://img.shields.io/npm/dt/v-code-diff?minimal=true)](https://www.npmjs.com/package/v-code-diff)
 
@@ -117,29 +117,31 @@ export default {
 
 # Events
 
-| Event Name   | Description    | Callback Params   |
-|---------- |-------- |---------- |
-| before-render | hook before rendering | -  |
-| after-render | hook after rendering | -  |
+
+| Event Name    | Description           | Callback Params |
+| ------------- | --------------------- | --------------- |
+| before-render | hook before rendering | -               |
+| after-render  | hook after rendering  | -               |
 
 # Props
 
-| Prop      | Description    | Type      | Optional       | Default   |
-|---------- |-------- |---------- |-------------  |-------- |
-| highlight| control whether to highlight the code | boolean  |   -    |    true     |
-| language| code language，such as `typescript`. If you don't input, it will be judged automatically. [view all supported languages](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md)  | string  |   -    |   -     |
-| old-string| old string | string  |   -    |    -     |
-| new-string| new string| string  |   -    |    -     |
-| context| number of show context lines | number  |   -    |    -     |
-| outputFormat| show method | string  |   line-by-line，side-by-side    |    line-by-line     |
-| drawFileList | show files list | boolean | - | false |
-| renderNothingWhenEmpty | render nothing when empty | boolean | - | false |
-| diffStyle | difference style | string | word, char | word |
-| fileName | file name | string | - |  |
-| isShowNoChange | show raw when no change | boolean | - | false |
-| trim | Remove blank characters before and after the string | boolean | - | false |
-| language | code language | boolean | - | false |
-| noDiffLineFeed | Do not diff windows line feed (CRLF) and linux line feed (LF)  | boolean | - | false |
+
+| Prop                   | Description                                                                                                                                                                                           | Type    | Optional                   | Default      |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | -------------------------- | ------------ |
+| highlight              | control whether to highlight the code                                                                                                                                                                 | boolean | -                          | true         |
+| language               | code language，such as`typescript`. If you don't input, it will be judged automatically. [view all supported languages](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) | string  | -                          | -            |
+| old-string             | old string                                                                                                                                                                                            | string  | -                          | -            |
+| new-string             | new string                                                                                                                                                                                            | string  | -                          | -            |
+| context                | number of show context lines                                                                                                                                                                          | number  | -                          | -            |
+| outputFormat           | show method                                                                                                                                                                                           | string  | line-by-line，side-by-side | line-by-line |
+| drawFileList           | show files list                                                                                                                                                                                       | boolean | -                          | false        |
+| renderNothingWhenEmpty | render nothing when empty                                                                                                                                                                             | boolean | -                          | false        |
+| diffStyle              | difference style                                                                                                                                                                                      | string  | word, char                 | word         |
+| fileName               | file name                                                                                                                                                                                             | string  | -                          |              |
+| isShowNoChange         | show raw when no change                                                                                                                                                                               | boolean | -                          | false        |
+| trim                   | Remove blank characters before and after the string                                                                                                                                                   | boolean | -                          | false        |
+| language               | code language                                                                                                                                                                                         | boolean | -                          | false        |
+| noDiffLineFeed         | Do not diff windows line feed (CRLF) and linux line feed (LF)                                                                                                                                         | boolean | -                          | false        |
 
 # Difference from [vue-code-diff](https://github.com/ddchef/vue-code-diff)
 
@@ -148,6 +150,10 @@ export default {
 * Faster rendering speed
 
 # ChangeLog
+
+### 0.3.12
+
+1. Remove prop `syncScroll` due to bug. Synchronized scrolling is now enabled by default
 
 ### 0.3.11
 
@@ -169,7 +175,7 @@ export default {
 ### 0.3.7
 
 1. Fix the problem of displaying "File Without Change..." when isShowNoChange is true and the old and new codes are different,
-then show all the source code
+   then show all the source code
 
 ### 0.3.6
 
