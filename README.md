@@ -7,6 +7,8 @@
 A code diff display plugin, available for Vue2 / Vue3. It is the vue3 version
 of [vue-code-diff](https://github.com/ddchef/vue-code-diff), refer to a lot of code, thanks here.
 
+✅ A new version with many features will soon be released, stay tuned.
+
 > [🇨🇳 中文文档](./README-zh.md)
 
 # Installation
