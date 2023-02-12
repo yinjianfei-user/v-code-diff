@@ -61,7 +61,7 @@ pnpm add @vue/composition-api
 #### Register globally
 
 ```ts
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import CodeDiff from 'v-code-diff'
 
 app
@@ -77,7 +77,7 @@ app
   <code-diff
     :old-string="'12345'"
     :new-string="'3456'"
-    output-format="side-by-side" />
+    output-format="side-by-side"/>
 </template>
 ```
 
@@ -149,14 +149,16 @@ version. And we will try to align the functions with the 0.x version as much as 
 
 Key points:
 
-In the 1.x version, language recognition and highlighting will no longer be automatically performed, you need to
-manually specify the language type, such as language="python", if not specified, it will default to plaintext
-and will not be highlighted.
-In the 1.x version, due to the fact that rendering and highlighting are performed at the same time, the component events
-have been removed.
-In the 1.x version, the following component properties (Prop) have been removed:
-highlight
-drawFileList
+* In the 1.x version, language recognition and highlighting will no longer be automatically performed, you need to
+  manually specify the language type, such as language="python", if not specified, it will default to plaintext
+  and will not be highlighted.
+* In the 1.x version, due to the fact that rendering and highlighting are performed at the same time, the component
+  events
+  have been removed.
+* In the 1.x version, the following component properties (Prop) have been removed:
+  * highlight
+  * drawFileList
+
 Below is a detailed comparison of the two versions, you can refer to it to complete the migration.
 
 ### The difference of event.
@@ -164,10 +166,10 @@ Below is a detailed comparison of the two versions, you can refer to it to compl
 The component events are no longer provided in the 1.x version as rendering and highlighting are carried out
 simultaneously.
 
-| Event Name    | Description         |
-|---------------|---------------------|
-| before-render | No longer available |
-| after-render  | No longer available |
+| Event Name    | Change Status      |
+|---------------|--------------------|
+| before-render | No longer provided |
+| after-render  | No longer provided |
 
 ### The difference of prop.
 
