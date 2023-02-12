@@ -1,37 +1,62 @@
-# VCodeDiff
+# v-code-diff
 
 [![NPM version](https://img.shields.io/npm/v/v-code-diff.svg?style=flat)](https://www.npmjs.com/package/v-code-diff)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Downloads](https://img.shields.io/npm/dt/v-code-diff?minimal=true)](https://www.npmjs.com/package/v-code-diff)
 
-A code diff display plugin, available for Vue2 / Vue3. It is the vue3 version
-of [vue-code-diff](https://github.com/ddchef/vue-code-diff), refer to a lot of code, thanks here.
+> A code diff display plugin, available for Vue2 / Vue3.
 
-✅ A new version with many features will soon be released, stay tuned.
+<p align='center'>
+<b>English</b> | <a href="https://github.com/Shimada666/v-code-diff/blob/master/README-zh.md">简体中文</a>
+</p>
 
-> [🇨🇳 中文文档](./README-zh.md)
+Old Version:
 
-# Installation
+0.x version, latest version 0.3.12 (traditional version, improved based
+on [vue-code-diff](https://github.com/ddchef/vue-code-diff), is no longer maintained. We will try to align the
+functionality of 0.x version in 1.x version and minimize migration cost as much as possible).
+This project references the following projects, and I would like to express my gratitude to the original authors!
 
-Install `v-code-diff`
+* [vue-diff](https://github.com/hoiheart/vue-diff)
+* [vue-code-diff](https://github.com/ddchef/vue-code-diff)
+* Github Code Diff
 
-```shell
-# With NPM
+## Contents
+
+- [Install](#Install)
+- [Getting started](#Getting-started)
+  - [Vue3](#Vue3)
+  - [Vue2](#Vue2)
+- [Props](#Props)
+- [Extend languages](#extend-languages)
+- [Migrate from 0.x version](#Migrate-from-0x-version)
+- [Changelog](#Changelog)
+- [LICENSE](#licence)
+
+## Install
+
+install `v-code-diff`
+
+```bash
+# npm
 npm i v-code-diff
 
-# With Yarn
+# yarn
 yarn add v-code-diff
+
+# pnpm
+pnpm add v-code-diff
 ```
 
 Vue2 developers need install composition-api
 
 ```shell
-yarn add @vue/composition-api
+pnpm add @vue/composition-api
 ```
 
-# Getting started
+## Getting Started
 
-### `Vue3`
+### Vue3
 
 #### Register globally
 
@@ -40,50 +65,27 @@ import {createApp} from 'vue'
 import CodeDiff from 'v-code-diff'
 
 app
-    .use(CodeDiff)
-    .mount('#app')
+  .use(CodeDiff)
+  .mount('#app')
 ```
 
-Then
+然后
 
 ```vue
 
 <template>
   <code-diff
-      :old-string="'12345'"
-      :new-string="'3456'"
-      file-name="test.txt"
-      output-format="side-by-side"/>
+    :old-string="'12345'"
+    :new-string="'3456'"
+    output-format="side-by-side"/>
 </template>
 ```
 
 #### Register locally
 
-in vue file
+Not recommended, but the relevant capabilities are retained to facilitate migration for 0.x users.
 
-```vue
-
-<template>
-  <code-diff
-      :old-string="'12345'"
-      :new-string="'3456'"
-      file-name="test.txt"
-      output-format="side-by-side"/>
-</template>
-<script lang="ts">
-import {defineComponent} from 'vue'
-import {CodeDiff} from 'v-code-diff'
-
-export default defineComponent({
-  components: {
-    CodeDiff
-  }
-})
-</script>
-
-```
-
-### `Vue2`
+### Vue2
 
 #### Register globally
 
@@ -96,62 +98,102 @@ Vue.use(CodeDiff);
 
 #### Register locally
 
-```vue
+Not recommended, but the relevant capabilities are retained to facilitate migration for 0.x users.
 
-<template>
-  <code-diff
-      :old-string="'12345'"
-      :new-string="'3456'"
-      file-name="test.txt"
-      output-format="side-by-side"/>
-</template>
-<script>
-import {CodeDiff} from 'v-code-diff'
+## Props
 
-export default {
-  name: 'App',
-  components: {
-    CodeDiff
-  }
-}
-</script>
+| Prop           | Description                                                                                                                                                             | Type    | Optional Values           | Default Value |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------|---------------|
+| language       | Code language, such as typescript, defaults to plain text. [View all supported languages](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) | string  | -                         | plaintext     |
+| oldString      | Old string	                                                                                                                                                             | string  | -                         | -             |
+| newString      | New string	                                                                                                                                                             | string  | -                         | -             |
+| context        | The number of lines to separate different parts so that they are not hidden                                                                                             | number  | -                         | -             |
+| outputFormat   | Display mode	                                                                                                                                                           | string  | line-by-line，side-by-side | line-by-line  |
+| diffStyle      | Difference style, word-level differences or letter-level differences                                                                                                    | string  | word, char                | word          |
+| trim           | Remove blank characters at the beginning and end of the string                                                                                                          | boolean | -                         | false         |
+| noDiffLineFeed | Don't diff Windows line feed (CRLF) and Linux line feed (LF)                                                                                                            | boolean | -                         | false         |
+
+## Extend languages
+
+In order to reduce the size of the packaged file, the system only supports the following commonly used languages by
+default.
+
+* plaintext
+* xml/html
+* javascript
+* json
+* yaml
+* python
+* java
+* bash
+* sql
+
+If the language you need is not included, you can manually import the relevant language highlighting module.
+
+```shell
+pnpm add highlight.js
 ```
 
-# Events
+```typescript
+import CodeDiff from 'v-code-diff';
+// Extend C language
+import c from 'highlight.js/lib/languages/c';
 
+CodeDiff.hljs.registerLanguage('c', c);
+```
 
-| Event Name    | Description           | Callback Params |
-| ------------- | --------------------- | --------------- |
-| before-render | hook before rendering | -               |
-| after-render  | hook after rendering  | -               |
+## Migrate from 0.x version
 
-# Props
+The v-code-diff 1.x version has features such as reduced packaging size and improved performance compared to the 0.x
+version. And we will try to align the functions with the 0.x version as much as possible to reduce your migration cost.
 
+Key points:
 
-| Prop                   | Description                                                                                                                                                                                           | Type    | Optional                   | Default      |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | -------------------------- | ------------ |
-| highlight              | control whether to highlight the code                                                                                                                                                                 | boolean | -                          | true         |
-| language               | code language，such as`typescript`. If you don't input, it will be judged automatically. [view all supported languages](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) | string  | -                          | -            |
-| old-string             | old string                                                                                                                                                                                            | string  | -                          | -            |
-| new-string             | new string                                                                                                                                                                                            | string  | -                          | -            |
-| context                | number of show context lines                                                                                                                                                                          | number  | -                          | -            |
-| outputFormat           | show method                                                                                                                                                                                           | string  | line-by-line，side-by-side | line-by-line |
-| drawFileList           | show files list                                                                                                                                                                                       | boolean | -                          | false        |
-| renderNothingWhenEmpty | render nothing when empty                                                                                                                                                                             | boolean | -                          | false        |
-| diffStyle              | difference style                                                                                                                                                                                      | string  | word, char                 | word         |
-| fileName               | file name                                                                                                                                                                                             | string  | -                          |              |
-| isShowNoChange         | show raw when no change                                                                                                                                                                               | boolean | -                          | false        |
-| trim                   | Remove blank characters before and after the string                                                                                                                                                   | boolean | -                          | false        |
-| language               | code language                                                                                                                                                                                         | boolean | -                          | false        |
-| noDiffLineFeed         | Do not diff windows line feed (CRLF) and linux line feed (LF)                                                                                                                                         | boolean | -                          | false        |
+* In the 1.x version, language recognition and highlighting will no longer be automatically performed, you need to
+  manually specify the language type, such as language="python", if not specified, it will default to plaintext
+  and will not be highlighted.
+* In the 1.x version, due to the fact that rendering and highlighting are performed at the same time, the component
+  events
+  have been removed.
+* In the 1.x version, the following component properties (Prop) have been removed:
+  * highlight
+  * drawFileList
 
-# Difference from [vue-code-diff](https://github.com/ddchef/vue-code-diff)
+Below is a detailed comparison of the two versions, you can refer to it to complete the migration.
 
-* Support `vue3`
-* Smaller package size
-* Faster rendering speed
+### The difference of event.
 
-# ChangeLog
+The component events are no longer provided in the 1.x version as rendering and highlighting are carried out
+simultaneously.
+
+| Event Name    | Change Status      |
+|---------------|--------------------|
+| before-render | No longer provided |
+| after-render  | No longer provided |
+
+### The difference of prop.
+
+| Prop                   | Description                                                                 | Change Status                                   |
+|------------------------|-----------------------------------------------------------------------------|-------------------------------------------------|
+| highlight              | Control code highlighting	                                                  | Removed in version 1.x                          |
+| language               | Code language                                                               | None                                            |
+| oldString              | Old string                                                                  | None                                            |
+| newString              | New string	                                                                 | None                                            |
+| context                | The number of lines to separate different parts so that they are not hidden | None                                            |
+| output-format          | Display mode                                                                | None                                            |
+| diffStyle              | Difference style, word-level differences or letter-level differences        | None                                            |
+| drawFileList           | Display file comparison list                                                | 	Removed in version 1.x                         | 
+| renderNothingWhenEmpty | Do not render when there is no comparison                                   | 	Removed in version 1.x                         | 
+| fileName               | File name                                                                   | To be determined, not under development         | 
+| isShowNoChange         | Display source code when there is no comparison                             | Removed as it became the default in version 1.x | 
+| trim                   | Remove blank characters at the beginning and end of the string              | None                                            | 
+| noDiffLineFeed         | Don't diff Windows line feed (CRLF) and Linux line feed (LF)                | None                                            | 
+
+## ChangeLog
+
+### 1.0.0-alpha.0
+
+1. The first version after restructuring.
 
 ### 0.3.12
 
@@ -176,7 +218,8 @@ export default {
 
 ### 0.3.7
 
-1. Fix the problem of displaying "File Without Change..." when isShowNoChange is true and the old and new codes are different,
+1. Fix the problem of displaying "File Without Change..." when isShowNoChange is true and the old and new codes are
+   different,
    then show all the source code
 
 ### 0.3.6
@@ -231,7 +274,7 @@ export default {
 
 First Version.
 
-# LICENCE
+## LICENCE
 
 MIT License
 
