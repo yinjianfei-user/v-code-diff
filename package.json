@@ -1,6 +1,6 @@
 {
   "name": "v-code-diff",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0",
   "description": "template component for vue-demi, can dev and build",
   "main": "dist/index.cjs",
   "module": "dist/index.es.js",
@@ -29,7 +29,7 @@
     "lint:fix": "eslint . --ext .vue,.js,.jsx,.ts,.tsx --fix --ignore-path .gitignore",
     "postinstall": "node scripts/postinstall.js",
     "prepublishOnly": "npm run build",
-    "release": "bumpp --no-commit --no-push --no-tag --preid alpha && npm publish --tag alpha"
+    "release": "bumpp --commit --no-push --tag && npm publish"
   },
   "author": "Shimada666<649940882@qq.com>",
   "license": "MIT",
