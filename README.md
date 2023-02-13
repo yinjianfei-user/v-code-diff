@@ -193,7 +193,8 @@ simultaneously.
 
 ### 1.0.0-alpha.0
 
-1. The first version after restructuring.
+1. Remove the diff2html dependency and draw the UI by self. By getting rid of the diff2html dependency, many styling problems have been resolved.
+2. More accurate syntax highlighting and faster highlighting speed.
 
 ### 0.3.12
 

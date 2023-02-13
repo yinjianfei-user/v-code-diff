@@ -33,8 +33,12 @@
   },
   "author": "Shimada666<649940882@qq.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Shimada666/v-code-diff/issues"
+  },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/Shimada666/v-code-diff.git"
   },
   "peerDependencies": {
     "@vue/composition-api": "^1.4.9",
@@ -48,7 +52,7 @@
   "dependencies": {
     "diff": "^5.0.0",
     "highlight.js": "^11.6.0",
-    "vue-demi": "latest"
+    "vue-demi": "^0.13.11"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.0",
