@@ -16,6 +16,7 @@ interface Props {
   outputFormat?: 'line-by-line' | 'side-by-side'
   trim?: boolean
   noDiffLineFeed?: boolean
+  maxHeight?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -25,6 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
   outputFormat: 'line-by-line',
   trim: false,
   noDiffLineFeed: false,
+  maxHeight: undefined,
 })
 
 const isUnifiedViewer = computed(() => props.outputFormat === 'line-by-line')
@@ -46,7 +48,7 @@ const diffChange = computed(() =>
 </script>
 
 <template>
-  <div class="code-diff-view">
+  <div class="code-diff-view" :style="{ maxHeight }">
     <UnifiedViewer v-if="isUnifiedViewer" :diff-change="diffChange" />
     <SplitViewer v-else :diff-change="diffChange" />
   </div>
