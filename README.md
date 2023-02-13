@@ -112,6 +112,7 @@ Not recommended, but the relevant capabilities are retained to facilitate migrat
 | diffStyle      | Difference style, word-level differences or letter-level differences                                                                                                    | string  | word, char                | word          |
 | trim           | Remove blank characters at the beginning and end of the string                                                                                                          | boolean | -                         | false         |
 | noDiffLineFeed | Don't diff Windows line feed (CRLF) and Linux line feed (LF)                                                                                                            | boolean | -                         | false         |
+| maxHeight      | Maximum height of component, for example: 300px                                                                                                                         | string  | -                         | undefined     |
 
 ## Extend languages
 
@@ -193,7 +194,8 @@ simultaneously.
 
 ### 1.0.0-alpha.0
 
-1. Remove the diff2html dependency and draw the UI by self. By getting rid of the diff2html dependency, many styling problems have been resolved.
+1. Remove the diff2html dependency and draw the UI by self. By getting rid of the diff2html dependency, many styling
+   problems have been resolved.
 2. More accurate syntax highlighting and faster highlighting speed.
 
 ### 0.3.12

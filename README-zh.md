@@ -112,6 +112,7 @@ Vue.use(CodeDiff);
 | diffStyle      | 差异风格, 单词级差异或字母级差异                                                                                                  | string  | word, char                | word         |
 | trim           | 移除字符串前后空白字符                                                                                                        | boolean | -                         | false        |
 | noDiffLineFeed | 不 diff windows 换行符(CRLF)与 linux 换行符(LF)                                                                            | boolean | -                         | false        |
+| maxHeight      | 组件最大高度，例如 300px                                                                                                    | number  | -                         | undefined    |
 
 ## 拓展高亮语言
 
@@ -186,7 +187,9 @@ v-code-diff 的 1.x 版本相较于 0.x 版本，具有打包体积减小、性�
 ## 变更记录
 
 ### 1.0.0
+
 重构后第一版
+
 1. 移除 diff2html 依赖，自行绘制 ui。由于摆脱了 diff2html 依赖，解决了之前很多样式问题
 2. 更准确的语法高亮，更快的高亮速度
 
