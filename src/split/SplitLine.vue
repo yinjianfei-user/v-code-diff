@@ -17,10 +17,10 @@ const getCodeMarker = (type: DiffType) => {
 
 <template>
   <tr v-if="splitLine.fold">
-    <td class="blob-num blob-num-empty empty-cell" colspan="1">
+    <td class="blob-num blob-num-hunk" colspan="1">
       >
     </td>
-    <td class="blob-code blob-code-empty empty-cell" colspan="3" align="left">
+    <td class="blob-code blob-code-inner blob-code-hunk" colspan="3" align="left">
       ⋯
     </td>
   </tr>

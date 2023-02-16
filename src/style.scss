@@ -13,6 +13,10 @@
 
   overflow-y: auto;
 
+  .file-header {
+    background-color: var(--color-canvas-subtle);
+  }
+
   table {
     border-spacing: 0;
   }
@@ -94,6 +98,13 @@
       left: 8px;
       padding-right: 8px;
       content: attr(data-code-marker);
+    }
+
+    .blob-num-hunk {
+      background-color: var(--color-diff-blob-hunk-num-bg);
+    }
+    .blob-code-hunk {
+      background-color: var(--color-accent-subtle);
     }
   }
 
