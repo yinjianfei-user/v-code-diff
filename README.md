@@ -107,12 +107,13 @@ Not recommended, but the relevant capabilities are retained to facilitate migrat
 | language       | Code language, such as typescript, defaults to plain text. [View all supported languages](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) | string  | -                         | plaintext     |
 | oldString      | Old string	                                                                                                                                                             | string  | -                         | -             |
 | newString      | New string	                                                                                                                                                             | string  | -                         | -             |
-| context        | The number of lines to separate different parts so that they are not hidden                                                                                             | number  | -                         | -             |
+| context        | The number of lines to separate different parts so that they are not hidden                                                                                             | number  | -                         | 10            |
 | outputFormat   | Display mode	                                                                                                                                                           | string  | line-by-line，side-by-side | line-by-line  |
 | diffStyle      | Difference style, word-level differences or letter-level differences                                                                                                    | string  | word, char                | word          |
 | trim           | Remove blank characters at the beginning and end of the string                                                                                                          | boolean | -                         | false         |
 | noDiffLineFeed | Don't diff Windows line feed (CRLF) and Linux line feed (LF)                                                                                                            | boolean | -                         | false         |
 | maxHeight      | Maximum height of component, for example: 300px                                                                                                                         | string  | -                         | undefined     |
+| filename       | Filename                                                                                                                                                                | string  | -                         | undefined     |
 
 ## Extend languages
 
@@ -156,9 +157,10 @@ Key points:
 * In the 1.x version, due to the fact that rendering and highlighting are performed at the same time, the component
   events
   have been removed.
-* In the 1.x version, the following component properties (Prop) have been removed:
-  * highlight
-  * drawFileList
+* In the 1.x version, the following component properties (Prop) have been changed:
+  * highlight - removed
+  * drawFileList - removed
+  * fileName - rename to "filename"
 
 Below is a detailed comparison of the two versions, you can refer to it to complete the migration.
 

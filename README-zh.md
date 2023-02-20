@@ -107,12 +107,13 @@ Vue.use(CodeDiff);
 | language       | 代码语言，如`typescript`，默认纯文本。 [查看全部支持语言](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) | string  | -                         | plaintext    |
 | oldString      | 旧的字符串                                                                                                              | string  | -                         | -            |
 | newString      | 新的字符串                                                                                                              | string  | -                         | -            |
-| context        | 不同地方上下间隔多少行不隐藏                                                                                                     | number  | -                         | -            |
+| context        | 不同地方上下间隔多少行不隐藏                                                                                                     | number  | -                         | 10           |
 | outputFormat   | 展示方式                                                                                                               | string  | line-by-line，side-by-side | line-by-line |
 | diffStyle      | 差异风格, 单词级差异或字母级差异                                                                                                  | string  | word, char                | word         |
 | trim           | 移除字符串前后空白字符                                                                                                        | boolean | -                         | false        |
 | noDiffLineFeed | 不 diff windows 换行符(CRLF)与 linux 换行符(LF)                                                                            | boolean | -                         | false        |
 | maxHeight      | 组件最大高度，例如 300px                                                                                                    | number  | -                         | undefined    |
+| filename       | 文件名                                                                                                                | string  | -                         | undefined    |
 
 ## 拓展高亮语言
 
@@ -151,9 +152,10 @@ v-code-diff 的 1.x 版本相较于 0.x 版本，具有打包体积减小、性�
 * 1.x 版本中，不再会自动识别语言并高亮，您需要手动指定语言类型，如 `language="python"`，若不指定则默认为纯文本`plaintext`
   ，不会进行高亮。
 * 1.x 版本中，由于渲染和高亮是同时进行，因此移除了组件事件
-* 1.x 版本中，移除了以下组件属性(Prop)
-  * highlight
-  * drawFileList
+* 1.x 版本中，以下组件属性(Prop)有变动
+  * highlight - 移除
+  * drawFileList - 移除
+  * fileName - 更名为 filename
 
 以下是两个版本具体的差异点，您可以参照阅读完成迁移。
 
@@ -168,21 +170,21 @@ v-code-diff 的 1.x 版本相较于 0.x 版本，具有打包体积减小、性�
 
 ### 组件属性对比
 
-| 参数                     | 含义                | 变更情况           |
-|------------------------|-------------------|----------------|
-| highlight              | 控制是否高亮代码          | 1.x 版本移除       |
-| language               | 代码语言              | 无              |
-| old-string             | 旧的字符串             | 无              |
-| new-string             | 新的字符串             | 无              |
-| context                | 不同地方上下间隔多少行不隐藏    | 无              |
-| output-format          | 展示方式              | 无              |
-| diff-style             | 差异风格, 单词级差异或字母级差异 | 无              |
-| drawFileList           | 展示对比文件列表          | 1.x 版本移除       | 
-| renderNothingWhenEmpty | 当无对比时不渲染          | 1.x 版本移除       | 
-| fileName               | 文件名               | 待定，暂不开发        | 
-| isShowNoChange         | 当无对比时展示源代码        | 1.x 变为默认情况，故移除 | 
-| trim                   | 移除字符串前后空白字符       | 无              | 
-| noDiffLineFeed         | 忽视不同系统换行符差异       | 无              | 
+| 参数                     | 含义                | 变更情况               |
+|------------------------|-------------------|--------------------|
+| highlight              | 控制是否高亮代码          | 1.x 版本移除           |
+| language               | 代码语言              | 无                  |
+| old-string             | 旧的字符串             | 无                  |
+| new-string             | 新的字符串             | 无                  |
+| context                | 不同地方上下间隔多少行不隐藏    | 无                  |
+| output-format          | 展示方式              | 无                  |
+| diff-style             | 差异风格, 单词级差异或字母级差异 | 无                  |
+| drawFileList           | 展示对比文件列表          | 1.x 版本移除           | 
+| renderNothingWhenEmpty | 当无对比时不渲染          | 1.x 版本移除           | 
+| fileName               | 文件名               | 1.x 版本更名为 filename | 
+| isShowNoChange         | 当无对比时展示源代码        | 1.x 变为默认情况，故移除     | 
+| trim                   | 移除字符串前后空白字符       | 无                  | 
+| noDiffLineFeed         | 忽视不同系统换行符差异       | 无                  | 
 
 ## 变更记录
 

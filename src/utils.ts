@@ -2,7 +2,7 @@ import * as Diff from 'diff'
 import type { Change } from 'diff'
 import hljs from './highlight'
 import { DiffType } from './types'
-import type { DiffLine, SplitViewerChange, UnifiedViewerChange } from './types'
+import type { DiffLine, DiffStat, SplitDiffLine, SplitViewerChange, UnifiedLine, UnifiedViewerChange } from './types'
 
 const MODIFIED_START_TAG = '<code-diff-modified>'
 const MODIFIED_CLOSE_TAG = '</code-diff-modified>'
@@ -113,13 +113,28 @@ const getHighlightCode = (language: string, code: string) => {
     .replace(new RegExp(closeEntity, 'g'), '</span>')
 }
 
+function calcDiffStat(changes: Change[]): DiffStat {
+  const count = (s: string, c: string) => (s.match(new RegExp(c, 'g')) || []).length
+
+  let additionsNum = 0
+  let deletionsNum = 0
+  for (const change of changes) {
+    if (change.added)
+      additionsNum += count(change.value.trim(), '\n') + 1
+
+    if (change.removed)
+      deletionsNum += count(change.value.trim(), '\n') + 1
+  }
+  return { additionsNum, deletionsNum }
+}
+
 export function createSplitDiff(
   oldString: string,
   newString: string,
   language = 'plaintext',
   diffStyle = 'word',
   context = 10,
-) {
+): SplitViewerChange {
   const newEmptySplitDiff = (): DiffLine => ({ type: DiffType.EMPTY })
   const newSplitDiff = (type: DiffType, num: number, code: string): DiffLine => ({ type, num, code })
 
@@ -129,7 +144,12 @@ export function createSplitDiff(
   let addNum = 0
   let skip = false
 
-  const result: SplitViewerChange = []
+  const rawChanges: SplitDiffLine[] = []
+  const result: SplitViewerChange = {
+    changes: rawChanges,
+    stat: calcDiffStat(changes),
+  }
+
   for (let i = 0; i < changes.length; i++) {
     if (skip) {
       skip = false
@@ -168,7 +188,7 @@ export function createSplitDiff(
           right = newSplitDiff(DiffType.ADD, addNum, highlightCode)
         }
 
-        result.push({ left, right })
+        rawChanges.push({ left, right })
       }
       break
     }
@@ -181,7 +201,7 @@ export function createSplitDiff(
         addNum++
 
         const highlightCode = getHighlightCode(language, line)
-        result.push({
+        rawChanges.push({
           left: newSplitDiff(DiffType.EQUAL, delNum, highlightCode),
           right: newSplitDiff(DiffType.EQUAL, addNum, highlightCode),
         })
@@ -195,7 +215,7 @@ export function createSplitDiff(
         for (const line of curLines) {
           delNum++
 
-          result.push({
+          rawChanges.push({
             left: newSplitDiff(DiffType.DELETE, delNum, getHighlightCode(language, line)),
             right: newEmptySplitDiff(),
           })
@@ -225,7 +245,7 @@ export function createSplitDiff(
               ? newSplitDiff(DiffType.ADD, addNum, getHighlightCode(language, rightLine))
               : newEmptySplitDiff()
 
-          result.push({ left, right })
+          rawChanges.push({ left, right })
         }
       }
     }
@@ -233,7 +253,7 @@ export function createSplitDiff(
     if (curType === DiffType.ADD) {
       for (const line of curLines) {
         addNum++
-        result.push({
+        rawChanges.push({
           left: newEmptySplitDiff(),
           right: newSplitDiff(DiffType.ADD, addNum, getHighlightCode(language, line)),
         })
@@ -242,37 +262,38 @@ export function createSplitDiff(
   }
 
   if (oldString === newString) {
-    for (let i = 0; i < result.length; i++)
-      result[i].fold = false
+    for (let i = 0; i < rawChanges.length; i++)
+      rawChanges[i].fold = false
 
     return result
   }
 
-  for (let i = 0; i < result.length; i++) {
-    const line = result[i]
+  for (let i = 0; i < rawChanges.length; i++) {
+    const line = rawChanges[i]
     if (line.left.type === DiffType.DELETE || line.right.type === DiffType.ADD) {
-      const [start, end] = [Math.max(i - context, 0), Math.min(i + context + 1, result.length)]
+      const [start, end] = [Math.max(i - context, 0), Math.min(i + context + 1, rawChanges.length)]
       for (let j = start; j < end; j++)
-        result[j].fold = false
+        rawChanges[j].fold = false
     }
     if (line.fold === undefined)
       line.fold = true
   }
 
-  const realResult = []
-  for (let i = 0; i < result.length; i++) {
-    const line = result[i]
+  const processedChanges = []
+  for (let i = 0; i < rawChanges.length; i++) {
+    const line = rawChanges[i]
     if (line.fold === false) {
-      realResult.push(line)
+      processedChanges.push(line)
       continue
     }
     if (line.fold === true) {
-      if (realResult[realResult.length - 1]?.fold !== true)
-        realResult.push(line)
+      if (processedChanges[processedChanges.length - 1]?.fold !== true)
+        processedChanges.push(line)
     }
   }
+  result.changes = processedChanges
 
-  return realResult
+  return result
 }
 
 export function createUnifiedDiff(
@@ -281,14 +302,19 @@ export function createUnifiedDiff(
   language = 'plaintext',
   diffStyle = 'word',
   context = 2,
-) {
+): UnifiedViewerChange {
   const changes = Diff.diffLines(oldString, newString)
 
   let delNum = 0
   let addNum = 0
   let skip = false
 
-  const result: UnifiedViewerChange = []
+  const rawChanges: UnifiedLine[] = []
+  const result: UnifiedViewerChange = {
+    changes: rawChanges,
+    stat: calcDiffStat(changes),
+  }
+
   for (let i = 0; i < changes.length; i++) {
     if (skip) {
       skip = false
@@ -315,7 +341,7 @@ export function createUnifiedDiff(
 
         const code = getHighlightCode(language, line)
 
-        result.push({
+        rawChanges.push({
           type: curType,
           code,
           addNum: curType === DiffType.DELETE ? undefined : addNum,
@@ -333,7 +359,7 @@ export function createUnifiedDiff(
         addNum++
         const code = getHighlightCode(language, line)
 
-        result.push({ type: DiffType.EQUAL, code, delNum, addNum })
+        rawChanges.push({ type: DiffType.EQUAL, code, delNum, addNum })
       }
     }
 
@@ -348,7 +374,7 @@ export function createUnifiedDiff(
           delNum++
 
           const code = getHighlightCode(language, renderWords(nextLine, curLine, diffStyle))
-          result.push({ type: DiffType.DELETE, code, delNum })
+          rawChanges.push({ type: DiffType.DELETE, code, delNum })
         }
 
         for (let j = 0; j < nextLines.length; j++) {
@@ -357,7 +383,7 @@ export function createUnifiedDiff(
           addNum++
 
           const code = getHighlightCode(language, renderWords(curLine, nextLine, diffStyle))
-          result.push({ type: DiffType.ADD, code, addNum })
+          rawChanges.push({ type: DiffType.ADD, code, addNum })
         }
 
         skip = true
@@ -368,7 +394,7 @@ export function createUnifiedDiff(
           delNum++
 
           const code = getHighlightCode(language, line)
-          result.push({ type: DiffType.DELETE, code, delNum })
+          rawChanges.push({ type: DiffType.DELETE, code, delNum })
         }
       }
     }
@@ -378,41 +404,42 @@ export function createUnifiedDiff(
         addNum++
         const code = getHighlightCode(language, line)
 
-        result.push({ type: DiffType.ADD, code, addNum })
+        rawChanges.push({ type: DiffType.ADD, code, addNum })
       }
     }
   }
 
-  for (let i = 0; i < result.length; i++) {
-    const line = result[i]
+  for (let i = 0; i < rawChanges.length; i++) {
+    const line = rawChanges[i]
     if (line.type === DiffType.DELETE || line.type === DiffType.ADD) {
-      const [start, end] = [Math.max(i - context, 0), Math.min(i + context + 1, result.length)]
+      const [start, end] = [Math.max(i - context, 0), Math.min(i + context + 1, rawChanges.length)]
       for (let j = start; j < end; j++)
-        result[j].fold = false
+        rawChanges[j].fold = false
     }
     if (line.fold === undefined)
       line.fold = true
   }
 
   if (oldString === newString) {
-    for (let i = 0; i < result.length; i++)
-      result[i].fold = false
+    for (let i = 0; i < rawChanges.length; i++)
+      rawChanges[i].fold = false
 
     return result
   }
 
-  const realResult = []
-  for (let i = 0; i < result.length; i++) {
-    const line = result[i]
+  const processedChanges = []
+  for (let i = 0; i < rawChanges.length; i++) {
+    const line = rawChanges[i]
     if (line.fold === false) {
-      realResult.push(line)
+      processedChanges.push(line)
       continue
     }
     if (line.fold === true) {
-      if (i === 0 || realResult[realResult.length - 1]?.fold !== true)
-        realResult.push(line)
+      if (i === 0 || processedChanges[processedChanges.length - 1]?.fold !== true)
+        processedChanges.push(line)
     }
   }
+  result.changes = processedChanges
 
-  return realResult
+  return result
 }

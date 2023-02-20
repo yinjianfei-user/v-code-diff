@@ -25,5 +25,16 @@ export interface UnifiedLine {
   addNum?: number
 }
 
-export type SplitViewerChange = SplitDiffLine[]
-export type UnifiedViewerChange = UnifiedLine[]
+export interface DiffStat {
+  additionsNum: number
+  deletionsNum: number
+}
+export interface SplitViewerChange {
+  changes: SplitDiffLine[]
+  stat: DiffStat
+}
+
+export interface UnifiedViewerChange {
+  changes: UnifiedLine[]
+  stat: DiffStat
+}

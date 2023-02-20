@@ -32,7 +32,7 @@ const form = reactive({
 `,
   language: 'javascript',
   diffStyle: 'word',
-  outputFormat: 'side-by-side',
+  outputFormat: 'line-by-line',
   context: 3,
 })
 </script>
@@ -41,8 +41,10 @@ const form = reactive({
   <p align="center">
     Vue version: {{ version }}
   </p>
-  <textarea v-model="form.oldString" style="width: 48vw" :rows="20" />
-  <textarea v-model="form.newString" style="width: 48vw; margin-left: 20px" :rows="20" />
+  <div style="display: flex; justify-content: space-evenly">
+    <textarea v-model="form.oldString" style="width: 48vw;" :rows="20" />
+    <textarea v-model="form.newString" style="width: 48vw;" :rows="20" />
+  </div>
   <CodeDiff
     :old-string="form.oldString"
     :new-string="form.newString"
@@ -57,8 +59,6 @@ const form = reactive({
 body > div {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 *,

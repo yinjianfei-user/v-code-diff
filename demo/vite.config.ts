@@ -1,8 +1,14 @@
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import Vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineConfig({
-  plugins: [vue(), Components({ resolvers: [AntDesignVueResolver()], dts: false })],
+  plugins: [Vue(), Components({ resolvers: [AntDesignVueResolver()], dts: false })],
+  resolve: {
+    alias: {
+      'vue': 'vue3',
+      'vue-demi': '../node_modules/vue-demi/lib/v3/index.mjs',
+    },
+  },
 })

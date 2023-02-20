@@ -17,6 +17,7 @@ interface Props {
   trim?: boolean
   noDiffLineFeed?: boolean
   maxHeight?: number
+  filename?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -27,6 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
   trim: false,
   noDiffLineFeed: false,
   maxHeight: undefined,
+  filename: undefined,
 })
 
 const isUnifiedViewer = computed(() => props.outputFormat === 'line-by-line')
@@ -49,8 +51,17 @@ const diffChange = computed(() =>
 
 <template>
   <div class="code-diff-view" :style="{ maxHeight }">
-    <UnifiedViewer v-if="isUnifiedViewer" :diff-change="diffChange" />
-    <SplitViewer v-else :diff-change="diffChange" />
+    <div class="file-header">
+      <div class="file-info">
+        <span class="filename">{{ filename }}</span>
+        <span class="diff-stat">
+          <span class="diff-stat-added">+{{ diffChange.stat.additionsNum }} additions</span>
+          <span class="diff-stat-deleted" style="margin-left: 8px;">-{{ diffChange.stat.deletionsNum }} deletions</span>
+        </span>
+      </div>
+    </div>
+    <UnifiedViewer v-if="isUnifiedViewer" :diff-change="diffChange.changes" />
+    <SplitViewer v-else :diff-change="diffChange.changes" />
   </div>
 </template>
 

@@ -5,12 +5,13 @@ import { newShortText } from './text/new-short-text'
 import { oldShortText } from './text/old-short-text'
 
 const formState = reactive({
-  language: 'json',
+  language: 'javascript',
   diffStyle: 'word',
   outputFormat: 'side-by-side',
   context: 10,
   trim: false,
   noDiffLineFeed: false,
+  filename: 'package.json',
 })
 
 const oldString = ref(oldShortText.value)
@@ -50,9 +51,9 @@ watch(newString, () => localStorage.setItem('newString', newString.value))
     layout="inline"
     :model="formState"
   >
-    <!-- <a-form-item label="文件名(filename)" -->
-    <!--  <a-input v-model:value="formState.filename" placeholder="请输入文件名" /> -->
-    <!-- </a-form-item> -->
+    <a-form-item label="文件名(filename)">
+      <a-input v-model:value="formState.filename" placeholder="请输入文件名" />
+    </a-form-item>
     <a-form-item label="语言(langauge)">
       <a-select v-model:value="formState.language" style="width: 120px;" disabled>
         <a-select-option value="json">
@@ -112,6 +113,7 @@ watch(newString, () => localStorage.setItem('newString', newString.value))
     :context="formState.context"
     :trim="formState.trim"
     :no-diff-line-feed="formState.noDiffLineFeed"
+    :filename="formState.filename"
   />
 </template>
 
