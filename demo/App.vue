@@ -5,7 +5,7 @@ import { newShortText } from './text/new-short-text'
 import { oldShortText } from './text/old-short-text'
 
 const formState = reactive({
-  language: 'javascript',
+  language: 'json',
   diffStyle: 'word',
   outputFormat: 'side-by-side',
   context: 10,
