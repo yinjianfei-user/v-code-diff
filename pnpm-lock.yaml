@@ -6,9 +6,11 @@ importers:
     specifiers:
       '@antfu/eslint-config': ^0.34.0
       '@types/diff': ^5.0.0
+      '@types/diff-match-patch': ^1.0.32
       '@types/node': ^18.11.18
       bumpp: ^8.2.1
       diff: ^5.0.0
+      diff-match-patch: ^1.0.5
       eslint: ^8.31.0
       highlight.js: ^11.6.0
       npm-run-all: ^4.1.5
@@ -23,11 +25,13 @@ importers:
       vue3: npm:vue@3
     dependencies:
       diff: 5.1.0
+      diff-match-patch: 1.0.5
       highlight.js: 11.7.0
       vue-demi: 0.13.11
     devDependencies:
       '@antfu/eslint-config': 0.34.2_l36yidrw337hwf2rtnamh77lgq
       '@types/diff': 5.0.2
+      '@types/diff-match-patch': 1.0.32
       '@types/node': 18.11.18
       bumpp: 8.2.1
       eslint: 8.33.0
@@ -1089,6 +1093,10 @@ packages:
       nanopop: 2.2.0
     dev: false
 
+  /@types/diff-match-patch/1.0.32:
+    resolution: {integrity: sha512-bPYT5ECFiblzsVzyURaNhljBH2Gh1t9LowgUwciMrNAhFewLkHT2H0Mto07Y4/3KCOGZHRQll3CTtQZ0X11D/A==}
+    dev: true
+
   /@types/diff/5.0.2:
     resolution: {integrity: sha512-uw8eYMIReOwstQ0QKF0sICefSy8cNO/v7gOTiIy9SbwuHyEecJUm7qlgueOO5S1udZ5I/irVydHVwMchgzbKTg==}
     dev: true
@@ -1311,7 +1319,7 @@ packages:
     dependencies:
       '@volar/code-gen': 0.40.13
       '@volar/source-map': 0.40.13
-      '@vue/compiler-core': 3.2.45
+      '@vue/compiler-core': 3.2.47
       '@vue/compiler-dom': 3.2.47
       '@vue/compiler-sfc': 3.2.47
       '@vue/reactivity': 3.2.45
@@ -1608,14 +1616,13 @@ packages:
       '@vue/shared': 3.2.47
       csstype: 2.6.21
 
-  /@vue/server-renderer/3.2.47_vue@3.2.47:
+  /@vue/server-renderer/3.2.47:
     resolution: {integrity: sha512-dN9gc1i8EvmP9RCzvneONXsKfBRgqFeFZLurmHOveL7oH6HiFXJw5OGu294n1nHc/HMgTy6LulU/tv5/A7f/LA==}
     peerDependencies:
       vue: 3.2.47
     dependencies:
       '@vue/compiler-ssr': 3.2.47
       '@vue/shared': 3.2.47
-      vue: 3.2.47
 
   /@vue/shared/3.2.38:
     resolution: {integrity: sha512-dTyhTIRmGXBjxJE+skC8tTWCGLCVc4wQgRRLt8+O9p5ewBAjoBwtCAkLPrtToSr1xltoe3st21Pv953aOZ7alg==}
@@ -2441,6 +2448,10 @@ packages:
   /destr/1.2.2:
     resolution: {integrity: sha512-lrbCJwD9saUQrqUfXvl6qoM+QN3W7tLV5pAOs+OqOmopCCz/JkE05MHedJR1xfk4IAnZuJXPVuN5+7jNA2ZCiA==}
     dev: true
+
+  /diff-match-patch/1.0.5:
+    resolution: {integrity: sha512-IayShXAgj/QMXgB0IWmKx+rOPuGMhqm5w6jvFxmVenXKIzRqTAAsbBPT3kWQeGANj3jGgvcvv4yK6SxqYmikgw==}
+    dev: false
 
   /diff/5.1.0:
     resolution: {integrity: sha512-D+mk+qE8VC/PAUrlAU34N+VfXev0ghe5ywmpqrawphmVZc1bEfn56uo9qpyGp1p4xpzOHkSW4ztBd6L7Xx4ACw==}
@@ -5307,7 +5318,7 @@ packages:
       '@vue/compiler-dom': 3.2.47
       '@vue/compiler-sfc': 3.2.47
       '@vue/runtime-dom': 3.2.47
-      '@vue/server-renderer': 3.2.47_vue@3.2.47
+      '@vue/server-renderer': 3.2.47
       '@vue/shared': 3.2.47
 
   /warning/4.0.3:

@@ -1,5 +1,6 @@
 import * as Diff from 'diff'
 import type { Change } from 'diff'
+import { DIFF_DELETE, DIFF_INSERT, diff_match_patch as DiffMatchPatch } from 'diff-match-patch'
 import hljs from './highlight'
 import { DiffType } from './types'
 import type { DiffLine, DiffStat, SplitDiffLine, SplitViewerChange, UnifiedLine, UnifiedViewerChange } from './types'
@@ -34,6 +35,27 @@ const renderWords = (prev?: string, current?: string, diffStyle = 'word'): strin
       lineType(word) === DiffType.ADD ? `${MODIFIED_START_TAG}${word.value}${MODIFIED_CLOSE_TAG}` : word.value,
     )
     .join('')
+}
+
+function diffLines(prev: string, current: string) {
+  const dmp = new DiffMatchPatch()
+  const a = dmp.diff_linesToChars_(prev, current)
+  const linePrev = a.chars1
+  const lineCurrent = a.chars2
+  const lineArray = a.lineArray
+  const diffs: any[] = dmp.diff_main(linePrev, lineCurrent, false)
+  dmp.diff_charsToLines_(diffs, lineArray)
+  return diffs.map((x) => {
+    const [type, text] = x
+    const count = text.trim().split('\n').length
+    const change: Diff.Change = {
+      count,
+      value: text,
+      removed: type === DIFF_DELETE,
+      added: type === DIFF_INSERT,
+    }
+    return change
+  })
 }
 
 const getHighlightCode = (language: string, code: string) => {
@@ -137,8 +159,7 @@ export function createSplitDiff(
 ): SplitViewerChange {
   const newEmptySplitDiff = (): DiffLine => ({ type: DiffType.EMPTY })
   const newSplitDiff = (type: DiffType, num: number, code: string): DiffLine => ({ type, num, code })
-
-  const changes = Diff.diffLines(oldString, newString)
+  const changes = diffLines(oldString, newString)
 
   let delNum = 0
   let addNum = 0
@@ -301,9 +322,9 @@ export function createUnifiedDiff(
   newString: string,
   language = 'plaintext',
   diffStyle = 'word',
-  context = 2,
+  context = 10,
 ): UnifiedViewerChange {
-  const changes = Diff.diffLines(oldString, newString)
+  const changes = diffLines(oldString, newString)
 
   let delNum = 0
   let addNum = 0

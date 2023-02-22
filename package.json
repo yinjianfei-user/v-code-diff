@@ -53,12 +53,14 @@
   },
   "dependencies": {
     "diff": "^5.0.0",
+    "diff-match-patch": "^1.0.5",
     "highlight.js": "^11.6.0",
     "vue-demi": "^0.13.11"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.0",
     "@types/diff": "^5.0.0",
+    "@types/diff-match-patch": "^1.0.32",
     "@types/node": "^18.11.18",
     "bumpp": "^8.2.1",
     "eslint": "^8.31.0",
