@@ -40,7 +40,7 @@ watch(newString, () => localStorage.setItem('newString', newString.value))
 
 <template>
   <p align="center">
-    Vue version: {{ version }}. CodeDiff version: 1.2.0.
+    Vue version: {{ version }}. CodeDiff version: 1.3.0.
   </p>
   <div style="display: flex; justify-content: space-evenly;">
     <textarea v-model="oldString" style="width: 48vw;" :rows="20" />
@@ -55,9 +55,13 @@ watch(newString, () => localStorage.setItem('newString', newString.value))
       <a-input v-model:value="formState.filename" placeholder="请输入文件名" />
     </a-form-item>
     <a-form-item label="语言(langauge)">
-      <a-select v-model:value="formState.language" style="width: 120px;" disabled>
-        <a-select-option value="json">
-          json
+      <a-select v-model:value="formState.language" style="width: 120px;">
+        <a-select-option
+          v-for="item in ['plaintext', 'json', 'yaml', 'javascript', 'java', 'python', 'sql', 'xml', 'bash']"
+          :key="item"
+          :value="item"
+        >
+          {{ item }}
         </a-select-option>
       </a-select>
     </a-form-item>
