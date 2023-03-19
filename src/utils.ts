@@ -3,7 +3,7 @@ import type { Change } from 'diff'
 import { DIFF_DELETE, DIFF_INSERT, diff_match_patch as DiffMatchPatch } from 'diff-match-patch'
 import hljs from './highlight'
 import { DiffType } from './types'
-import type { DiffLine, DiffStat, SplitDiffLine, SplitViewerChange, UnifiedLine, UnifiedViewerChange } from './types'
+import type { DiffLine, DiffStat, SplitLineChange, SplitViewerChange, UnifiedLineChange, UnifiedViewerChange } from './types'
 
 const MODIFIED_START_TAG = '<code-diff-modified>'
 const MODIFIED_CLOSE_TAG = '</code-diff-modified>'
@@ -165,7 +165,7 @@ export function createSplitDiff(
   let addNum = 0
   let skip = false
 
-  const rawChanges: SplitDiffLine[] = []
+  const rawChanges: SplitLineChange[] = []
   const result: SplitViewerChange = {
     changes: rawChanges,
     stat: calcDiffStat(changes),
@@ -330,7 +330,7 @@ export function createUnifiedDiff(
   let addNum = 0
   let skip = false
 
-  const rawChanges: UnifiedLine[] = []
+  const rawChanges: UnifiedLineChange[] = []
   const result: UnifiedViewerChange = {
     changes: rawChanges,
     stat: calcDiffStat(changes),

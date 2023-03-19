@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { DiffType } from '../types'
-import type { SplitDiffLine } from '../types'
+import type { SplitLineChange } from '../types'
 
 const props = defineProps<{
-  splitLine: SplitDiffLine
+  splitLine: SplitLineChange
 }>()
 
 const getCodeMarker = (type: DiffType) => {

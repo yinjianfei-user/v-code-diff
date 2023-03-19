@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { UnifiedLine } from '../types'
+import type { UnifiedLineChange } from '../types'
 import { DiffType } from '../types'
 
 const props = defineProps<{
-  line: UnifiedLine
+  line: UnifiedLineChange
 }>()
 
 const getCodeMarker = (type: DiffType) => {

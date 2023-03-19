@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { UnifiedViewerChange } from '../types'
+import type { UnifiedLineChange } from '../types'
 import UnifiedLine from './UnifiedLine.vue'
 
 const props = defineProps<{
-  diffChange: UnifiedViewerChange
+  diffChange: UnifiedLineChange[]
 }>()
 </script>
 

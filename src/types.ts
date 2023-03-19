@@ -11,13 +11,13 @@ export interface DiffLine {
   num?: number
 }
 
-export interface SplitDiffLine {
+export interface SplitLineChange {
   fold?: boolean
   left: DiffLine
   right: DiffLine
 }
 
-export interface UnifiedLine {
+export interface UnifiedLineChange {
   fold?: boolean
   type: DiffType
   code: string
@@ -30,11 +30,11 @@ export interface DiffStat {
   deletionsNum: number
 }
 export interface SplitViewerChange {
-  changes: SplitDiffLine[]
+  changes: SplitLineChange[]
   stat: DiffStat
 }
 
 export interface UnifiedViewerChange {
-  changes: UnifiedLine[]
+  changes: UnifiedLineChange[]
   stat: DiffStat
 }
