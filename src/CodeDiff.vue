@@ -16,7 +16,7 @@ interface Props {
   outputFormat?: 'line-by-line' | 'side-by-side'
   trim?: boolean
   noDiffLineFeed?: boolean
-  maxHeight?: number
+  maxHeight?: string
   filename?: string
 }
 
