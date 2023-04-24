@@ -13,6 +13,7 @@ export const baseBuildConfig = defineConfig({
   build: {
     outDir: path.resolve(__dirname, `./dist/${isVue2 ? 'v2' : 'v3'}`),
     emptyOutDir: false,
+    target: 'es2018',
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       formats: ['es', 'cjs'],
