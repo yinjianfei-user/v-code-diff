@@ -50,7 +50,6 @@ const form = reactive({
     :new-string="form.newString"
     :language="form.language"
     :diff-style="form.diffStyle"
-    :output-format="form.outputFormat"
     :context="form.context"
   />
 </template>
@@ -60,13 +59,5 @@ body > div {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   color: #2c3e50;
-}
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  position: relative;
-  font-weight: normal;
 }
 </style>

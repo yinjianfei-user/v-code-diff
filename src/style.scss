@@ -3,6 +3,7 @@
 .code-diff-view {
   * {
     position: static;
+    box-sizing: border-box;
   }
 
   position: relative;
