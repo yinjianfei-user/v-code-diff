@@ -69,7 +69,7 @@ app
   .mount('#app')
 ```
 
-然后
+then
 
 ```vue
 
