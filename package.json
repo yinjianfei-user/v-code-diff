@@ -18,10 +18,13 @@
     "types"
   ],
   "scripts": {
-    "build": "npm run clean && run-s build:*",
+    "build": "npm run clean && run-s build:**",
     "build:2": "vue-demi-switch 2 vue2 && pnpm --filter vue2-playground build",
+    "build:2:umd": "vue-demi-switch 2 vue2 && format=umd pnpm --filter vue2-playground build",
     "build:2.7": "vue-demi-switch 2.7 vue2 && pnpm --filter vue2.7-playground build",
+    "build:2.7:umd": "vue-demi-switch 2.7 vue2 && format=umd pnpm --filter vue2.7-playground build",
     "build:3": "vue-demi-switch 3 vue3 && pnpm --filter vue3-playground build",
+    "build:3:umd": "vue-demi-switch 3 vue3 && format=umd pnpm --filter vue3-playground build",
     "clean": "rimraf ./dist",
     "deploy:demo": "pnpm --filter demo gh-pages",
     "dev:2": "vue-demi-switch 2 vue2 && pnpm --filter vue2-playground dev",
