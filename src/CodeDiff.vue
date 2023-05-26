@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue-demi'
+import { computed, ref, watch } from 'vue-demi'
 import { createSplitDiff, createUnifiedDiff } from './utils'
 import UnifiedViewer from './unified/UnifiedViewer.vue'
 import SplitViewer from './split/SplitViewer.vue'
@@ -42,11 +42,15 @@ const newString = computed(() => {
   return props.noDiffLineFeed ? value.replace(/(\r\n)/g, '\n') : value
 })
 
-const diffChange = computed(() =>
+const raw = computed(() =>
   isUnifiedViewer.value
     ? createUnifiedDiff(oldString.value, newString.value, props.language, props.diffStyle, props.context)
     : createSplitDiff(oldString.value, newString.value, props.language, props.diffStyle, props.context),
 )
+const diffChange = ref(raw.value)
+watch(() => props, () => {
+  diffChange.value = raw.value
+}, { deep: true })
 </script>
 
 <template>
@@ -60,11 +64,9 @@ const diffChange = computed(() =>
         </span>
       </div>
     </div>
-    <UnifiedViewer v-if="isUnifiedViewer" :diff-change="diffChange.changes" />
-    <SplitViewer v-else :diff-change="diffChange.changes" />
+    <UnifiedViewer v-if="isUnifiedViewer" :diff-change="diffChange" />
+    <SplitViewer v-else :diff-change="diffChange" />
   </div>
 </template>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

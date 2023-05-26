@@ -1,10 +1,19 @@
 <script setup lang="ts">
-import type { SplitViewerChange } from '../types'
+import type { SplitLineChange, SplitViewerChange } from '../types'
 import SplitLine from './SplitLine.vue'
 
 const props = defineProps<{
   diffChange: SplitViewerChange
 }>()
+
+function expandHandler({ hideIndex }: SplitLineChange) {
+  if (hideIndex === undefined)
+    return
+  props.diffChange.collector[hideIndex!].lines.forEach((line) => {
+    line.hide = false
+    line.fold = false
+  })
+}
 </script>
 
 <template>
@@ -16,7 +25,7 @@ const props = defineProps<{
       <col>
     </colgroup>
     <tbody>
-      <SplitLine v-for="(item, index) in diffChange" :key="index" :split-line="item" />
+      <SplitLine v-for="(item, index) in diffChange?.changes" :key="index" :split-line="item" @expand="expandHandler" />
     </tbody>
   </table>
 </template>

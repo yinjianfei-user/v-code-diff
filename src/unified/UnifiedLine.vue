@@ -5,6 +5,7 @@ import { DiffType } from '../types'
 const props = defineProps<{
   line: UnifiedLineChange
 }>()
+const emit = defineEmits(['expand'])
 
 const getCodeMarker = (type: DiffType) => {
   if (type === DiffType.DELETE)
@@ -16,24 +17,22 @@ const getCodeMarker = (type: DiffType) => {
 </script>
 
 <template>
-  <tr v-if="line.fold">
-    <td class="blob-num blob-num-hunk">
-      >
-    </td>
-    <td class="blob-num blob-num-hunk">
+  <tr v-if="line.hideIndex !== undefined && line.hide">
+    <td class="blob-num blob-num-hunk text-center" colspan="2" @click="emit('expand', line)">
       >
     </td>
     <td class="blob-code blob-code-hunk" align="left">
       ⋯
     </td>
   </tr>
-  <tr v-else>
+  <tr v-else-if="!line.hide">
     <td
       class="blob-num"
       :class="{
         'blob-num-deletion': line.type === DiffType.DELETE,
         'blob-num-addition': line.type === DiffType.ADD,
         'blob-num-context': line.type === DiffType.EQUAL,
+        'blob-num-hunk': line.hide !== undefined,
       }"
     >
       {{ line.delNum }}
@@ -44,6 +43,7 @@ const getCodeMarker = (type: DiffType) => {
         'blob-num-deletion': line.type === DiffType.DELETE,
         'blob-num-addition': line.type === DiffType.ADD,
         'blob-num-context': line.type === DiffType.EQUAL,
+        'blob-num-hunk': line.hide !== undefined,
       }"
     >
       {{ line.addNum }}
@@ -54,6 +54,7 @@ const getCodeMarker = (type: DiffType) => {
         'blob-code-deletion': line.type === DiffType.DELETE,
         'blob-code-addition': line.type === DiffType.ADD,
         'blob-code-context': line.type === DiffType.EQUAL,
+        'blob-code-hunk': line.hide !== undefined,
       }"
     >
       <span class="blob-code-inner blob-code-marker" :data-code-marker="getCodeMarker(line.type)" v-html="line.code" />
