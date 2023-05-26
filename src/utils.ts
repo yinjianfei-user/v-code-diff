@@ -3,7 +3,7 @@ import type { Change } from 'diff'
 import { DIFF_DELETE, DIFF_INSERT, diff_match_patch as DiffMatchPatch } from 'diff-match-patch'
 import hljs from './highlight'
 import { DiffType } from './types'
-import type { DiffLine, DiffStat, SplitLineChange, SplitViewerChange, UnifiedLineChange, UnifiedViewerChange } from './types'
+import type { DiffLine, DiffStat, SplitLineChange, SplitLineUnchanges, SplitViewerChange, UnifiedLineChange, UnifiedLineUnchanges, UnifiedViewerChange } from './types'
 
 const MODIFIED_START_TAG = '<code-diff-modified>'
 const MODIFIED_CLOSE_TAG = '</code-diff-modified>'
@@ -168,6 +168,7 @@ export function createSplitDiff(
   const rawChanges: SplitLineChange[] = []
   const result: SplitViewerChange = {
     changes: rawChanges,
+    collector: [],
     stat: calcDiffStat(changes),
   }
 
@@ -208,7 +209,6 @@ export function createSplitDiff(
           left = newEmptySplitDiff()
           right = newSplitDiff(DiffType.ADD, addNum, highlightCode)
         }
-
         rawChanges.push({ left, right })
       }
       break
@@ -300,17 +300,35 @@ export function createSplitDiff(
       line.fold = true
   }
 
-  const processedChanges = []
+  const processedChanges: SplitViewerChange['changes'] = []
+  let unchanges: SplitLineUnchanges['lines'] = [] // collector for unchanged lines.
+
   for (let i = 0; i < rawChanges.length; i++) {
     const line = rawChanges[i]
     if (line.fold === false) {
+      if (unchanges.length) {
+        unchanges[0].hideIndex = result.collector.length
+        result.collector.push({
+          lines: unchanges,
+          fold: true,
+        })
+        unchanges = []
+      }
       processedChanges.push(line)
       continue
     }
-    if (line.fold === true) {
-      if (processedChanges[processedChanges.length - 1]?.fold !== true)
-        processedChanges.push(line)
-    }
+
+    line.hide = true
+    unchanges.push(line)
+    processedChanges.push(line)
+  }
+  if (unchanges.length) {
+    unchanges[0].hideIndex = result.collector.length
+    result.collector.push({
+      lines: unchanges,
+      fold: true,
+    })
+    unchanges = []
   }
   result.changes = processedChanges
 
@@ -333,6 +351,7 @@ export function createUnifiedDiff(
   const rawChanges: UnifiedLineChange[] = []
   const result: UnifiedViewerChange = {
     changes: rawChanges,
+    collector: [],
     stat: calcDiffStat(changes),
   }
 
@@ -449,16 +468,37 @@ export function createUnifiedDiff(
   }
 
   const processedChanges = []
+  let unchanges: UnifiedLineUnchanges['lines'] = [] // collector for unchanged lines.
+
   for (let i = 0; i < rawChanges.length; i++) {
     const line = rawChanges[i]
     if (line.fold === false) {
+      if (unchanges.length) {
+        unchanges[0].hideIndex = result.collector.length
+        // Keeps "hideIndex" in first element of collector
+        // for delegating lines to expand.
+        result.collector.push({
+          lines: unchanges,
+          fold: true,
+        })
+        unchanges = []
+      }
       processedChanges.push(line)
       continue
     }
-    if (line.fold === true) {
-      if (i === 0 || processedChanges[processedChanges.length - 1]?.fold !== true)
-        processedChanges.push(line)
+    if (line.type === 'equal') {
+      line.hide = true
+      unchanges.push(line)
     }
+    processedChanges.push(line)
+  }
+  if (unchanges.length) {
+    unchanges[0].hideIndex = result.collector.length
+    result.collector.push({
+      lines: unchanges,
+      fold: true,
+    })
+    unchanges = []
   }
   result.changes = processedChanges
 
