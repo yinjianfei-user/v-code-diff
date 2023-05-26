@@ -40,7 +40,7 @@ watch(newString, () => localStorage.setItem('newString', newString.value))
 
 <template>
   <p align="center">
-    Vue version: {{ version }}. CodeDiff version: 1.3.0.
+    Vue version: {{ version }}. CodeDiff version: 1.5.0.
   </p>
   <div style="display: flex; justify-content: space-evenly;">
     <textarea v-model="oldString" style="width: 48vw;" :rows="20" />
