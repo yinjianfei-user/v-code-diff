@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/v-code-diff.svg?style=flat)](https://www.npmjs.com/package/v-code-diff)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Downloads](https://img.shields.io/npm/dt/v-code-diff?minimal=true)](https://www.npmjs.com/package/v-code-diff)
+[![Downloads](https://img.shields.io/npm/dm/v-code-diff?minimal=true)](https://www.npmjs.com/package/v-code-diff)
 
 > A code diff display plugin, available for Vue2 / Vue3.
 
