@@ -1,6 +1,6 @@
 {
   "name": "v-code-diff",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "template component for vue-demi, can dev and build",
   "main": "dist/index.cjs",
   "module": "dist/index.es.js",
