@@ -34,12 +34,16 @@ const props = withDefaults(defineProps<Props>(), {
 const isUnifiedViewer = computed(() => props.outputFormat === 'line-by-line')
 
 const oldString = computed(() => {
-  const value = props.trim ? props.oldString.trim() : props.oldString
-  return props.noDiffLineFeed ? value.replace(/(\r\n)/g, '\n') : value
+  let value = props.oldString || ''
+  value = props.trim ? value.trim() : value
+  value = props.noDiffLineFeed ? value.replace(/(\r\n)/g, '\n') : value
+  return value
 })
 const newString = computed(() => {
-  const value = props.trim ? props.newString.trim() : props.newString
-  return props.noDiffLineFeed ? value.replace(/(\r\n)/g, '\n') : value
+  let value = props.newString || ''
+  value = props.trim ? value.trim() : value
+  value = props.noDiffLineFeed ? value.replace(/(\r\n)/g, '\n') : value
+  return value
 })
 
 const raw = computed(() =>
