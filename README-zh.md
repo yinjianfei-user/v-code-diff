@@ -27,6 +27,7 @@
 - [开始使用](#开始使用)
   - [Vue3](#Vue3)
   - [Vue2](#Vue2)
+- [在线演示](#Demo)
 - [组件属性](#组件属性)
 - [拓展高亮语言](#拓展高亮语言)
 - [从 0.x 版本迁移](#从-0x-版本迁移)
@@ -89,7 +90,7 @@ app
 
 ```ts
 import Vue from 'vue';
-import CodeDiff from 'v-code-diff'
+import CodeDiff from 'v-code-diff';
 
 Vue.use(CodeDiff);
 ```
@@ -97,6 +98,14 @@ Vue.use(CodeDiff);
 #### 单独引入
 
 不推荐，但保留相关能力，方便 0.x 用户迁移
+
+## Demo
+
+|        | npm | cdn                                                                            |
+|--------|-----|--------------------------------------------------------------------------------|
+| vue2   |     | [vue2-cdn](https://stackblitz.com/edit/v-code-diff-vue2-cdn?file=index.html)   |
+| vue2.7 |     | [vue27-cdn](https://stackblitz.com/edit/v-code-diff-vue27-cdn?file=index.html) |
+| vue3   |     | [vue3-cdn](https://stackblitz.com/edit/v-code-diff-vue3-cdn?file=index.html)   |
 
 ## 组件属性
 

@@ -28,6 +28,7 @@ This project references the following projects, and I would like to express my g
   - [Vue3](#Vue3)
   - [Vue2](#Vue2)
 - [Props](#Props)
+- [Demo](#Demo)
 - [Extend languages](#extend-languages)
 - [Migrate from 0.x version](#Migrate-from-0x-version)
 
@@ -97,6 +98,14 @@ Vue.use(CodeDiff);
 #### Register locally
 
 Not recommended, but the relevant capabilities are retained to facilitate migration for 0.x users.
+
+## Demo
+
+|        | npm | cdn                                                                            |
+|--------|-----|--------------------------------------------------------------------------------|
+| vue2   |     | [vue2-cdn](https://stackblitz.com/edit/v-code-diff-vue2-cdn?file=index.html)   |
+| vue2.7 |     | [vue27-cdn](https://stackblitz.com/edit/v-code-diff-vue27-cdn?file=index.html) |
+| vue3   |     | [vue3-cdn](https://stackblitz.com/edit/v-code-diff-vue3-cdn?file=index.html)   |
 
 ## Props
 
