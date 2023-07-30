@@ -20,6 +20,14 @@ interface Props {
   filename?: string
 }
 
+interface DiffResult {
+  stat: {
+    isChanged: boolean
+    addNum: number
+    delNum: number
+  }
+}
+
 const props = withDefaults(defineProps<Props>(), {
   language: 'plaintext',
   context: 10,
@@ -30,6 +38,10 @@ const props = withDefaults(defineProps<Props>(), {
   maxHeight: undefined,
   filename: undefined,
 })
+
+const emits = defineEmits<{
+  (e: 'diff', diffResult: DiffResult): void
+}>()
 
 const isUnifiedViewer = computed(() => props.outputFormat === 'line-by-line')
 
@@ -52,9 +64,18 @@ const raw = computed(() =>
     : createSplitDiff(oldString.value, newString.value, props.language, props.diffStyle, props.context),
 )
 const diffChange = ref(raw.value)
+const isNotChanged = computed(() => diffChange.value.stat.additionsNum === 0 && diffChange.value.stat.deletionsNum === 0)
+
 watch(() => props, () => {
   diffChange.value = raw.value
-}, { deep: true })
+  emits('diff', {
+    stat: {
+      isChanged: !isNotChanged.value,
+      addNum: diffChange.value.stat.additionsNum,
+      delNum: diffChange.value.stat.deletionsNum,
+    },
+  })
+}, { deep: true, immediate: true })
 </script>
 
 <template>
@@ -73,4 +94,5 @@ watch(() => props, () => {
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+</style>
