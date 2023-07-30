@@ -2,15 +2,15 @@
   "name": "v-code-diff",
   "version": "1.5.1",
   "description": "template component for vue-demi, can dev and build",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.es.js"
+    }
+  },
   "main": "dist/index.cjs",
   "module": "dist/index.es.js",
   "types": "./types/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js"
-    }
-  },
   "files": [
     "scripts",
     "dist",
@@ -31,19 +31,11 @@
     "dev:2.7": "vue-demi-switch 2.7 vue2 && pnpm --filter vue2.7-playground dev",
     "dev:3": "vue-demi-switch 3 vue3 && pnpm --filter vue3-playground dev",
     "dev:demo": "vue-demi-switch 3 vue3 && pnpm --filter demo dev",
-    "lint:fix": "eslint . --ext .vue,.js,.jsx,.ts,.tsx --fix --ignore-path .gitignore",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --ext .vue,.js,.jsx,.ts,.tsx,json --fix --ignore-path .gitignore",
     "postinstall": "node scripts/postinstall.js",
     "prepublishOnly": "npm run build",
     "release": "bumpp --commit --no-push --tag && npm publish"
-  },
-  "author": "Shimada666<649940882@qq.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Shimada666/v-code-diff/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Shimada666/v-code-diff.git"
   },
   "peerDependencies": {
     "@vue/composition-api": "^1.4.9",
@@ -66,7 +58,7 @@
     "@types/diff-match-patch": "^1.0.32",
     "@types/node": "^18.11.18",
     "bumpp": "^8.2.1",
-    "eslint": "^8.31.0",
+    "eslint": "^8.45.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "sass": "^1.63.6",

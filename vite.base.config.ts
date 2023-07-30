@@ -1,4 +1,5 @@
-import * as path from 'path'
+import * as path from 'node:path'
+import process from 'node:process'
 import { defineConfig } from 'vite'
 import { isVue2 } from 'vue-demi'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'

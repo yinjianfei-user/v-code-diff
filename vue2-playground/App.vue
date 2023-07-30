@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { reactive, version } from 'vue-demi'
-import hljs from 'highlight.js'
 
 const form = reactive({
   oldString: '<script setup lang="ts">',

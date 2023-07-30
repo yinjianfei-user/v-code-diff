@@ -1,7 +1,7 @@
 import CodeDiff from './CodeDiff.vue'
 import hljs from './highlight'
 
-const install = (app: any) => {
+function install(app: any) {
   app.component('CodeDiff', CodeDiff)
 }
 

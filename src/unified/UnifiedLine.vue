@@ -2,12 +2,12 @@
 import type { UnifiedLineChange } from '../types'
 import { DiffType } from '../types'
 
-const props = defineProps<{
+defineProps<{
   line: UnifiedLineChange
 }>()
 const emit = defineEmits(['expand'])
 
-const getCodeMarker = (type: DiffType) => {
+function getCodeMarker(type: DiffType) {
   if (type === DiffType.DELETE)
     return '-'
   if (type === DiffType.ADD)

@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import { createVuePlugin as vue2 } from 'vite-plugin-vue2'
 import ScriptSetup from 'unplugin-vue2-script-setup/vite'

@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import vue3 from '@vitejs/plugin-vue'
 import { baseBuildConfig, defaultPlugins } from '../vite.base.config'

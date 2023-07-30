@@ -11,7 +11,7 @@ const MODIFIED_CLOSE_TAG = '</code-diff-modified>'
 const startEntity = MODIFIED_START_TAG.replace('<', '&lt;').replace('>', '&gt;')
 const closeEntity = MODIFIED_CLOSE_TAG.replace('<', '&lt;').replace('>', '&gt;')
 
-const lineType = (diff: Diff.Change): DiffType => {
+function lineType(diff: Diff.Change): DiffType {
   if (diff === undefined)
     return DiffType.EQUAL
   if (diff.added)
@@ -21,7 +21,7 @@ const lineType = (diff: Diff.Change): DiffType => {
   return DiffType.EQUAL
 }
 
-const renderWords = (prev?: string, current?: string, diffStyle = 'word'): string => {
+function renderWords(prev?: string, current?: string, diffStyle = 'word'): string {
   if (typeof prev === 'undefined')
     return current!
   if (typeof current === 'undefined')
@@ -58,7 +58,7 @@ function diffLines(prev: string, current: string) {
   })
 }
 
-const getHighlightCode = (language: string, code: string) => {
+function getHighlightCode(language: string, code: string) {
   const hasModifiedTags = code.match(new RegExp(`(${MODIFIED_START_TAG}|${MODIFIED_CLOSE_TAG})`, 'g'))
 
   if (!hasModifiedTags)

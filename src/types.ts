@@ -1,4 +1,4 @@
-export const enum DiffType {
+export enum DiffType {
   EQUAL = 'equal',
   DELETE = 'removed',
   ADD = 'added',

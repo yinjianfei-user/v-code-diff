@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <CodeDiff old-string="123" new-string="456"></CodeDiff>
+  <CodeDiff old-string="123" new-string="456" />
 </template>
 
 <style scoped>

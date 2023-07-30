@@ -60,7 +60,7 @@ pnpm add @vue/composition-api
 #### Register globally
 
 ```ts
-import {createApp} from 'vue'
+import { createApp } from 'vue'
 import CodeDiff from 'v-code-diff'
 
 app
@@ -71,12 +71,12 @@ app
 then
 
 ```vue
-
 <template>
   <code-diff
-    :old-string="'12345'"
-    :new-string="'3456'"
-    output-format="side-by-side"/>
+    old-string="12345"
+    new-string="3456"
+    output-format="side-by-side"
+  />
 </template>
 ```
 
@@ -89,10 +89,10 @@ Not recommended, but the relevant capabilities are retained to facilitate migrat
 #### Register globally
 
 ```ts
-import Vue from 'vue';
+import Vue from 'vue'
 import CodeDiff from 'v-code-diff'
 
-Vue.use(CodeDiff);
+Vue.use(CodeDiff)
 ```
 
 #### Register locally

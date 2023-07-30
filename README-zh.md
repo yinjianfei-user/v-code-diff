@@ -60,7 +60,7 @@ pnpm add @vue/composition-api
 #### 注册为全局组件
 
 ```ts
-import {createApp} from 'vue'
+import { createApp } from 'vue'
 import CodeDiff from 'v-code-diff'
 
 app
@@ -71,12 +71,12 @@ app
 然后
 
 ```vue
-
 <template>
   <code-diff
-    :old-string="'12345'"
-    :new-string="'3456'"
-    output-format="side-by-side"/>
+    old-string="12345"
+    new-string="3456"
+    output-format="side-by-side"
+  />
 </template>
 ```
 
@@ -89,10 +89,10 @@ app
 #### 注册为全局组件
 
 ```ts
-import Vue from 'vue';
-import CodeDiff from 'v-code-diff';
+import Vue from 'vue'
+import CodeDiff from 'v-code-diff'
 
-Vue.use(CodeDiff);
+Vue.use(CodeDiff)
 ```
 
 #### 单独引入

@@ -22,13 +22,13 @@ if (localStorage.getItem('oldString'))
 if (localStorage.getItem('newString'))
   newString.value = localStorage.getItem('newString')
 
-const resetText = () => {
+function resetText() {
   localStorage.removeItem('oldString')
   localStorage.removeItem('newString')
   oldString.value = oldShortText.value
   newString.value = newShortText.value
 }
-const clearText = () => {
+function clearText() {
   localStorage.removeItem('oldString')
   localStorage.removeItem('newString')
   oldString.value = ''

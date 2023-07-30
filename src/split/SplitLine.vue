@@ -2,12 +2,13 @@
 import { DiffType } from '../types'
 import type { SplitLineChange } from '../types'
 
-const props = defineProps<{
+defineProps<{
   splitLine: SplitLineChange
 }>()
+
 const emit = defineEmits(['expand'])
 
-const getCodeMarker = (type: DiffType) => {
+function getCodeMarker(type: DiffType) {
   if (type === DiffType.DELETE)
     return '-'
   if (type === DiffType.ADD)
