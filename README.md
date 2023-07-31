@@ -28,6 +28,7 @@ This project references the following projects, and I would like to express my g
   - [Vue3](#Vue3)
   - [Vue2](#Vue2)
 - [Props](#Props)
+- [Events](#Events)
 - [Demo](#Demo)
 - [Extend languages](#extend-languages)
 - [Migrate from 0.x version](#Migrate-from-0x-version)
@@ -121,6 +122,12 @@ Not recommended, but the relevant capabilities are retained to facilitate migrat
 | noDiffLineFeed | Don't diff Windows line feed (CRLF) and Linux line feed (LF)                                                                                                            | boolean | -                         | false         |
 | maxHeight      | Maximum height of component, for example: 300px                                                                                                                         | string  | -                         | undefined     |
 | filename       | Filename                                                                                                                                                                | string  | -                         | undefined     |
+
+## Events
+| Name | Description                  | Type                                                                            |
+|------|------------------------------|---------------------------------------------------------------------------------|
+| diff | triggers when diff finished	 | (result: {stat: { isChanged: boolean, addNum: number, delNum: number}}) => void |
+
 
 ## Extend languages
 

@@ -29,6 +29,7 @@
   - [Vue2](#Vue2)
 - [在线演示](#Demo)
 - [组件属性](#组件属性)
+- [组件事件](#组件事件)
 - [拓展高亮语言](#拓展高亮语言)
 - [从 0.x 版本迁移](#从-0x-版本迁移)
 
@@ -121,6 +122,12 @@ Vue.use(CodeDiff)
 | noDiffLineFeed | 不 diff windows 换行符(CRLF)与 linux 换行符(LF)                                                                            | boolean | -                         | false        |
 | maxHeight      | 组件最大高度，例如 300px                                                                                                    | number  | -                         | undefined    |
 | filename       | 文件名                                                                                                                | string  | -                         | undefined    |
+
+## 组件事件
+| Name | Description | Type                                                                            |
+|------|-------------|---------------------------------------------------------------------------------|
+| diff | diff 完成后触发  | (result: {stat: { isChanged: boolean, addNum: number, delNum: number}}) => void |
+
 
 ## 拓展高亮语言
 
