@@ -36,11 +36,18 @@ function clearText() {
 }
 watch(oldString, () => localStorage.setItem('oldString', oldString.value))
 watch(newString, () => localStorage.setItem('newString', newString.value))
+
+function printEvent(e) {
+  // eslint-disable-next-line no-console
+  console.log('diff finished! below is data:')
+  // eslint-disable-next-line no-console
+  console.log(e)
+}
 </script>
 
 <template>
   <p align="center">
-    Vue version: {{ version }}. CodeDiff version: 1.5.0.
+    Vue version: {{ version }}. CodeDiff version: 1.6.0
   </p>
   <div style="display: flex; justify-content: space-evenly;">
     <textarea v-model="oldString" style="width: 48vw;" :rows="20" />
@@ -118,6 +125,7 @@ watch(newString, () => localStorage.setItem('newString', newString.value))
     :trim="formState.trim"
     :no-diff-line-feed="formState.noDiffLineFeed"
     :filename="formState.filename"
+    @diff="printEvent"
   />
 </template>
 
