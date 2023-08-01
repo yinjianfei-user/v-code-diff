@@ -1,5 +1,7 @@
-const fs = require('node:fs')
-const path = require('node:path')
+// eslint-disable-next-line unicorn/prefer-node-protocol
+const fs = require('fs')
+// eslint-disable-next-line unicorn/prefer-node-protocol
+const path = require('path')
 
 const dir = path.resolve(__dirname, '..', 'dist')
 
