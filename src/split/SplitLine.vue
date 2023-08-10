@@ -15,6 +15,19 @@ function getCodeMarker(type: DiffType) {
     return '+'
   return ''
 }
+
+function onSplitLineMousedown(side: 'left' | 'right') {
+  window.getSelection()!.removeAllRanges()
+
+  const leftElements = document.querySelectorAll('.file-diff-split .split-side-left')!
+  const rightElements = document.querySelectorAll('.file-diff-split .split-side-right')!
+
+  for (const el of rightElements)
+    el.classList.toggle('no-select', side === 'left')
+
+  for (const el of leftElements)
+    el.classList.toggle('no-select', side === 'right')
+}
 </script>
 
 <template>
@@ -27,31 +40,40 @@ function getCodeMarker(type: DiffType) {
     </td>
   </tr>
   <tr v-else-if="!splitLine.hide">
-    <template v-for="line in [splitLine.left, splitLine.right]">
+    <template v-for="(line, index) in [splitLine.left, splitLine.right]">
       <!-- eslint-disable -->
       <template v-if="line.type === DiffType.EMPTY">
         <td class="blob-num blob-num-empty empty-cell" />
         <td class="blob-code blob-code-empty empty-cell" />
       </template>
       <template v-else>
-        <td class="blob-num" :class="{
-          'blob-num-deletion': line.type === DiffType.DELETE,
-          'blob-num-addition': line.type === DiffType.ADD,
-          'blob-num-context': line.type === DiffType.EQUAL,
-          'blob-num-hunk': splitLine.hide !== undefined,
-
-        }">
+        <td
+          class="blob-num"
+          :class="{
+            'blob-num-deletion': line.type === DiffType.DELETE,
+            'blob-num-addition': line.type === DiffType.ADD,
+            'blob-num-context': line.type === DiffType.EQUAL,
+            'blob-num-hunk': splitLine.hide !== undefined,
+          }"
+        >
           {{ line.num }}
         </td>
-        <td class="blob-code" :class="{
-          'blob-code-deletion': line.type === DiffType.DELETE,
-          'blob-code-addition': line.type === DiffType.ADD,
-          'blob-code-context': line.type === DiffType.EQUAL,
-          'blob-code-hunk': splitLine.hide !== undefined,
-
-        }">
-          <span class="blob-code-inner blob-code-marker" :data-code-marker="getCodeMarker(line.type)"
-            v-html="line.code" />
+        <td
+          class="blob-code"
+          :class="{
+            'blob-code-deletion': line.type === DiffType.DELETE,
+            'blob-code-addition': line.type === DiffType.ADD,
+            'blob-code-context': line.type === DiffType.EQUAL,
+            'blob-code-hunk': splitLine.hide !== undefined,
+            'split-side-left': index === 0,
+            'split-side-right': index === 1,
+          }"
+          @mousedown="onSplitLineMousedown(index === 0 ? 'left' : 'right')"
+        >
+          <span
+            class="blob-code-inner blob-code-marker" :data-code-marker="getCodeMarker(line.type)"
+            v-html="line.code"
+          />
         </td>
       </template>
       <!-- eslint-enable -->

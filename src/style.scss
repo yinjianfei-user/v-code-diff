@@ -140,6 +140,10 @@
     .blob-code + .blob-num {
       border-left: 1px solid var(--color-border-muted);
     }
+
+    .no-select {
+      user-select: none;
+    }
   }
 
   .empty-cell {
@@ -148,4 +152,3 @@
     border-right-color: var(--color-border-muted);
   }
 }
-
