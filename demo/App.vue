@@ -12,6 +12,8 @@ const formState = reactive({
   trim: false,
   noDiffLineFeed: false,
   filename: 'package.json',
+  hideHeader: false,
+  hideStat: false,
 })
 
 const oldString = ref(oldShortText.value)
@@ -104,6 +106,12 @@ function printEvent(e) {
     <a-form-item label="不 diff 换行符(noDiffLineFeed)">
       <a-switch v-model:checked="formState.noDiffLineFeed" />
     </a-form-item>
+    <a-form-item label="隐藏首部(hide Header)">
+      <a-switch v-model:checked="formState.hideHeader" />
+    </a-form-item>
+    <a-form-item label="隐藏统计信息(hide Statistics)">
+      <a-switch v-model:checked="formState.hideStat" />
+    </a-form-item>
     <a-form-item>
       <a-button type="link" @click="resetText">
         重置文本(reset text)
@@ -125,6 +133,8 @@ function printEvent(e) {
     :trim="formState.trim"
     :no-diff-line-feed="formState.noDiffLineFeed"
     :filename="formState.filename"
+    :hide-header="formState.hideHeader"
+    :hide-stat="formState.hideStat"
     @diff="printEvent"
   />
 </template>
