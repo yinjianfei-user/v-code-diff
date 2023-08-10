@@ -18,6 +18,8 @@ interface Props {
   noDiffLineFeed?: boolean
   maxHeight?: string
   filename?: string
+  hideHeader: boolean
+  hideStat: boolean
 }
 
 interface DiffResult {
@@ -37,6 +39,8 @@ const props = withDefaults(defineProps<Props>(), {
   noDiffLineFeed: false,
   maxHeight: undefined,
   filename: undefined,
+  hideHeader: false,
+  hideStat: false,
 })
 
 const emits = defineEmits<{
@@ -80,10 +84,10 @@ watch(() => props, () => {
 
 <template>
   <div class="code-diff-view" :style="{ maxHeight }">
-    <div class="file-header">
+    <div v-if="!hideHeader" class="file-header">
       <div class="file-info">
         <span class="filename">{{ filename }}</span>
-        <span class="diff-stat">
+        <span v-if="!hideStat" class="diff-stat">
           <span class="diff-stat-added">+{{ diffChange.stat.additionsNum }} additions</span>
           <span class="diff-stat-deleted" style="margin-left: 8px;">-{{ diffChange.stat.deletionsNum }} deletions</span>
         </span>
