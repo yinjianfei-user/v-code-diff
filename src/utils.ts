@@ -47,7 +47,7 @@ function diffLines(prev: string, current: string) {
   dmp.diff_charsToLines_(diffs, lineArray)
   return diffs.map((x) => {
     const [type, text] = x
-    const count = text.trim().split('\n').length
+    const count = text.replace(/\n$/, '').split('\n').length
     const change: Diff.Change = {
       count,
       value: text,
