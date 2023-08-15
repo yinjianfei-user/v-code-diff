@@ -49,7 +49,7 @@ function printEvent(e) {
 
 <template>
   <p align="center">
-    Vue version: {{ version }}. CodeDiff version: 1.6.0
+    Vue version: {{ version }}. CodeDiff version: 1.7.1
   </p>
   <div style="display: flex; justify-content: space-evenly;">
     <textarea v-model="oldString" style="width: 48vw;" :rows="20" />
