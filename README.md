@@ -205,3 +205,7 @@ simultaneously.
 | isShowNoChange         | Display source code when there is no comparison                             | Removed as it became the default in version 1.x | 
 | trim                   | Remove blank characters at the beginning and end of the string              | None                                            | 
 | noDiffLineFeed         | Don't diff Windows line feed (CRLF) and Linux line feed (LF)                | None                                            |
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Shimada666/v-code-diff&type=Date)](https://star-history.com/#Shimada666/v-code-diff&Date)
