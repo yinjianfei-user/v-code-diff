@@ -18,8 +18,8 @@ interface Props {
   noDiffLineFeed?: boolean
   maxHeight?: string
   filename?: string
-  hideHeader: boolean
-  hideStat: boolean
+  hideHeader?: boolean
+  hideStat?: boolean
 }
 
 interface DiffResult {
