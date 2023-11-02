@@ -1,6 +1,6 @@
 {
   "name": "v-code-diff",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "template component for vue-demi, can dev and build",
   "exports": {
     ".": {
