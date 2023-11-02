@@ -4,9 +4,9 @@
   "description": "template component for vue-demi, can dev and build",
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
       "require": "./dist/index.cjs.js",
-      "import": "./dist/index.es.js",
-      "types": "./types/index.d.ts"
+      "import": "./dist/index.es.js"
     }
   },
   "main": "dist/index.cjs",
