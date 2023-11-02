@@ -2,35 +2,15 @@
 import { version } from 'vue-demi'
 import { reactive } from 'vue'
 
+// import { oldLongText } from '../demo/text/old-long-text'
+// import { newLongText } from '../demo/text/new-long-text'
+
 const form = reactive({
-  oldString: `
-123
-123
-123
-456
-123
-123
-123
-123
-123
-123
-123
-123
-`,
-  newString: `
-123
-123
-123
-452
-123
-123
-123
-123
-123
-123
-123
-`,
-  language: 'javascript',
+  // oldString: oldLongText,
+  // newString: newLongText,
+  oldString: '123\n123\n123\n456\n123\n123\n123\n123\n123\n123\n123\n',
+  newString: '123\n123\n123\n123\n123\n123\n123\n123\n123\n123\n123\n',
+  language: 'plaintext',
   diffStyle: 'word',
   outputFormat: 'line-by-line',
   context: 3,
@@ -49,6 +29,7 @@ const form = reactive({
     :old-string="form.oldString"
     :new-string="form.newString"
     :language="form.language"
+    output-format="side-by-side"
     :diff-style="form.diffStyle"
     :context="form.context"
   />
