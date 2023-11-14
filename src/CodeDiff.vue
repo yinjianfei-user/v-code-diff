@@ -88,8 +88,10 @@ watch(() => props, () => {
       <div class="file-info">
         <span class="filename">{{ filename }}</span>
         <span v-if="!hideStat" class="diff-stat">
-          <span class="diff-stat-added">+{{ diffChange.stat.additionsNum }} additions</span>
-          <span class="diff-stat-deleted" style="margin-left: 8px;">-{{ diffChange.stat.deletionsNum }} deletions</span>
+          <slot name="stat">
+            <span class="diff-stat-added">+{{ diffChange.stat.additionsNum }} additions</span>
+            <span class="diff-stat-deleted" style="margin-left: 8px;">-{{ diffChange.stat.deletionsNum }} deletions</span>
+          </slot>
         </span>
       </div>
     </div>
