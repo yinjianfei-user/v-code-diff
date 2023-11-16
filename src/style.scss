@@ -28,16 +28,21 @@
       margin-left: 8px;
       height: 24px;
 
-      .filename {
+      .info-left {
         font-size: 13px;
         color: var(--color-fg-default);
       }
+      .info-right {
+        display: flex;
+        justify-content: space-between;
+        width: 50%;
+      }
       .diff-stat {
         .diff-stat-added {
-          color: var(--color-diffstat-addition-bg)
+          color: var(--color-diffstat-addition-bg);
         }
         .diff-stat-deleted {
-          color: var(--color-danger-emphasis)
+          color: var(--color-danger-emphasis);
         }
       }
     }
