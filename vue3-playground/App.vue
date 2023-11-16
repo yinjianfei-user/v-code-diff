@@ -10,6 +10,8 @@ const form = reactive({
   // newString: newLongText,
   oldString: '123\n123\n123\n456\n123\n123\n123\n123\n123\n123\n123\n',
   newString: '123\n123\n123\n123\n123\n123\n123\n123\n123\n123\n123\n',
+  filename: 'oldFile',
+  newFilename: 'newFile',
   language: 'plaintext',
   diffStyle: 'word',
   outputFormat: 'line-by-line',
@@ -28,8 +30,10 @@ const form = reactive({
   <CodeDiff
     :old-string="form.oldString"
     :new-string="form.newString"
+    :filename="form.filename"
+    :newFilename="form.newFilename"
     :language="form.language"
-    output-format="side-by-side"
+    :output-format="form.outputFormat"
     :diff-style="form.diffStyle"
     :context="form.context"
   />
