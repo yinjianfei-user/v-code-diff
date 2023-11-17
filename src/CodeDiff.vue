@@ -7,6 +7,24 @@ import SplitViewer from './split/SplitViewer.vue'
 import './style.scss'
 import 'highlight.js/scss/vs.scss'
 
+const props = withDefaults(defineProps<Props>(), {
+  language: 'plaintext',
+  context: 10,
+  diffStyle: 'word',
+  outputFormat: 'line-by-line',
+  trim: false,
+  noDiffLineFeed: false,
+  maxHeight: undefined,
+  filename: undefined,
+  newFilename: undefined,
+  hideHeader: false,
+  hideStat: false,
+})
+
+const emits = defineEmits<{
+  (e: 'diff', diffResult: DiffResult): void
+}>()
+
 interface Props {
   newString: string
   oldString: string
@@ -30,24 +48,6 @@ interface DiffResult {
     delNum: number
   }
 }
-
-const props = withDefaults(defineProps<Props>(), {
-  language: 'plaintext',
-  context: 10,
-  diffStyle: 'word',
-  outputFormat: 'line-by-line',
-  trim: false,
-  noDiffLineFeed: false,
-  maxHeight: undefined,
-  filename: undefined,
-  newFilename: undefined,
-  hideHeader: false,
-  hideStat: false,
-})
-
-const emits = defineEmits<{
-  (e: 'diff', diffResult: DiffResult): void
-}>()
 
 const isUnifiedViewer = computed(() => props.outputFormat === 'line-by-line')
 
