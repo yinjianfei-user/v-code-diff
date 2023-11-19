@@ -5,25 +5,6 @@ import UnifiedViewer from './unified/UnifiedViewer.vue'
 import SplitViewer from './split/SplitViewer.vue'
 
 import './style.scss'
-import 'highlight.js/scss/vs.scss'
-
-const props = withDefaults(defineProps<Props>(), {
-  language: 'plaintext',
-  context: 10,
-  diffStyle: 'word',
-  outputFormat: 'line-by-line',
-  trim: false,
-  noDiffLineFeed: false,
-  maxHeight: undefined,
-  filename: undefined,
-  newFilename: undefined,
-  hideHeader: false,
-  hideStat: false,
-})
-
-const emits = defineEmits<{
-  (e: 'diff', diffResult: DiffResult): void
-}>()
 
 interface Props {
   newString: string
@@ -39,7 +20,27 @@ interface Props {
   newFilename?: string
   hideHeader?: boolean
   hideStat?: boolean
+  theme?: 'light' | 'dark'
 }
+
+const props = withDefaults(defineProps<Props>(), {
+  language: 'plaintext',
+  context: 10,
+  diffStyle: 'word',
+  outputFormat: 'line-by-line',
+  trim: false,
+  noDiffLineFeed: false,
+  maxHeight: undefined,
+  filename: undefined,
+  newFilename: undefined,
+  hideHeader: false,
+  hideStat: false,
+  theme: 'light',
+})
+
+const emits = defineEmits<{
+  (e: 'diff', diffResult: DiffResult): void
+}>()
 
 interface DiffResult {
   stat: {
@@ -85,7 +86,7 @@ watch(() => props, () => {
 </script>
 
 <template>
-  <div class="code-diff-view" :style="{ maxHeight }">
+  <div class="code-diff-view" :theme="theme" :style="{ maxHeight }">
     <div v-if="!hideHeader" class="file-header">
       <!--  line by line -->
       <div v-if="isUnifiedViewer" class="file-info">
