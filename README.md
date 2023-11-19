@@ -17,9 +17,9 @@ on [vue-code-diff](https://github.com/ddchef/vue-code-diff), is no longer mainta
 functionality of 0.x version in 1.x version and minimize migration cost as much as possible).
 This project references the following projects, and I would like to express my gratitude to the original authors!
 
-* [vue-diff](https://github.com/hoiheart/vue-diff)
-* [vue-code-diff](https://github.com/ddchef/vue-code-diff)
-* Github Code Diff
+- [vue-diff](https://github.com/hoiheart/vue-diff)
+- [vue-code-diff](https://github.com/ddchef/vue-code-diff)
+- Github Code Diff
 
 ## Contents
 
@@ -103,46 +103,48 @@ Not recommended, but the relevant capabilities are retained to facilitate migrat
 ## Demo
 
 |        | npm | cdn                                                                            |
-|--------|-----|--------------------------------------------------------------------------------|
+| ------ | --- | ------------------------------------------------------------------------------ |
 | vue2   |     | [vue2-cdn](https://stackblitz.com/edit/v-code-diff-vue2-cdn?file=index.html)   |
 | vue2.7 |     | [vue27-cdn](https://stackblitz.com/edit/v-code-diff-vue27-cdn?file=index.html) |
 | vue3   |     | [vue3-cdn](https://stackblitz.com/edit/v-code-diff-vue3-cdn?file=index.html)   |
 
 ## Props
 
-| Prop           | Description                                                                                                                                                             | Type    | Optional Values           | Default Value |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------|---------------|
-| language       | Code language, such as typescript, defaults to plain text. [View all supported languages](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) | string  | -                         | plaintext     |
-| oldString      | Old string	                                                                                                                                                             | string  | -                         | -             |
-| newString      | New string	                                                                                                                                                             | string  | -                         | -             |
-| context        | The number of lines to separate different parts so that they are not hidden                                                                                             | number  | -                         | 10            |
-| outputFormat   | Display mode	                                                                                                                                                           | string  | line-by-line，side-by-side | line-by-line  |
-| diffStyle      | Difference style, word-level differences or letter-level differences                                                                                                    | string  | word, char                | word          |
-| trim           | Remove blank characters at the beginning and end of the string                                                                                                          | boolean | -                         | false         |
-| noDiffLineFeed | Don't diff Windows line feed (CRLF) and Linux line feed (LF)                                                                                                            | boolean | -                         | false         |
-| maxHeight      | Maximum height of component, for example: 300px                                                                                                                         | string  | -                         | undefined     |
-| filename       | Filename                                                                                                                                                                | string  | -                         | undefined     |
+| Prop           | Description                                                                                                                                                             | Type      | Optional Values            | Default Value |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------- | ------------- |
+| language       | Code language, such as typescript, defaults to plain text. [View all supported languages](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) | string    | -                          | plaintext     |
+| oldString      | Old string                                                                                                                                                              | string    | -                          | -             |
+| newString      | New string                                                                                                                                                              | string    | -                          | -             |
+| context        | The number of lines to separate different parts so that they are not hidden                                                                                             | number    | -                          | 10            |
+| outputFormat   | Display mode                                                                                                                                                            | string    | line-by-line，side-by-side | line-by-line  |
+| diffStyle      | Difference style, word-level differences or letter-level differences                                                                                                    | string    | word, char                 | word          |
+| trim           | Remove blank characters at the beginning and end of the string                                                                                                          | boolean   | -                          | false         |
+| noDiffLineFeed | Don't diff Windows line feed (CRLF) and Linux line feed (LF)                                                                                                            | boolean   | -                          | false         |
+| maxHeight      | Maximum height of component, for example: 300px                                                                                                                         | string    | -                          | undefined     |
+| filename       | Filename                                                                                                                                                                | string    | -                          | undefined     |
+| newFilename    | New filename                                                                                                                                                            | string    | -                          | undefined     |
+| theme          | Add dark mode                                                                                                                                                           | ThemeType | light , dark               | 'light'       |
 
 ## Events
-| Name | Description                  | Type                                                                            |
-|------|------------------------------|---------------------------------------------------------------------------------|
-| diff | triggers when diff finished	 | (result: {stat: { isChanged: boolean, addNum: number, delNum: number}}) => void |
 
+| Name | Description                 | Type                                                                            |
+| ---- | --------------------------- | ------------------------------------------------------------------------------- |
+| diff | triggers when diff finished | (result: {stat: { isChanged: boolean, addNum: number, delNum: number}}) => void |
 
 ## Extend languages
 
 In order to reduce the size of the packaged file, the system only supports the following commonly used languages by
 default.
 
-* plaintext
-* xml/html
-* javascript
-* json
-* yaml
-* python
-* java
-* bash
-* sql
+- plaintext
+- xml/html
+- javascript
+- json
+- yaml
+- python
+- java
+- bash
+- sql
 
 If the language you need is not included, you can manually import the relevant language highlighting module.
 
@@ -165,16 +167,18 @@ version. And we will try to align the functions with the 0.x version as much as 
 
 Key points:
 
-* In the 1.x version, language recognition and highlighting will no longer be automatically performed, you need to
+- In the 1.x version, language recognition and highlighting will no longer be automatically performed, you need to
   manually specify the language type, such as language="python", if not specified, it will default to plaintext
   and will not be highlighted.
-* In the 1.x version, due to the fact that rendering and highlighting are performed at the same time, the component
+- In the 1.x version, due to the fact that rendering and highlighting are performed at the same time, the component
   events
   have been removed.
-* In the 1.x version, the following component properties (Prop) have been changed:
-  * highlight - removed
-  * drawFileList - removed
-  * fileName - rename to "filename"
+- In the 1.x version, the following component properties (Prop) have been changed:
+  - highlight - removed
+  - drawFileList - removed
+  - fileName - rename to "filename"
+  - newFilename - new
+  - theme - new
 
 Below is a detailed comparison of the two versions, you can refer to it to complete the migration.
 
@@ -184,27 +188,29 @@ The component events are no longer provided in the 1.x version as rendering and 
 simultaneously.
 
 | Event Name    | Change Status      |
-|---------------|--------------------|
+| ------------- | ------------------ |
 | before-render | No longer provided |
 | after-render  | No longer provided |
 
 ### The difference of prop.
 
 | Prop                   | Description                                                                 | Change Status                                   |
-|------------------------|-----------------------------------------------------------------------------|-------------------------------------------------|
-| highlight              | Control code highlighting	                                                  | Removed in version 1.x                          |
+| ---------------------- | --------------------------------------------------------------------------- | ----------------------------------------------- |
+| highlight              | Control code highlighting                                                   | Removed in version 1.x                          |
 | language               | Code language                                                               | None                                            |
 | oldString              | Old string                                                                  | None                                            |
-| newString              | New string	                                                                 | None                                            |
+| newString              | New string                                                                  | None                                            |
 | context                | The number of lines to separate different parts so that they are not hidden | None                                            |
 | output-format          | Display mode                                                                | None                                            |
 | diffStyle              | Difference style, word-level differences or letter-level differences        | None                                            |
-| drawFileList           | Display file comparison list                                                | 	Removed in version 1.x                         | 
-| renderNothingWhenEmpty | Do not render when there is no comparison                                   | 	Removed in version 1.x                         | 
-| fileName               | File name                                                                   | To be determined, not under development         | 
-| isShowNoChange         | Display source code when there is no comparison                             | Removed as it became the default in version 1.x | 
-| trim                   | Remove blank characters at the beginning and end of the string              | None                                            | 
+| drawFileList           | Display file comparison list                                                | Removed in version 1.x                          |
+| renderNothingWhenEmpty | Do not render when there is no comparison                                   | Removed in version 1.x                          |
+| fileName               | File name                                                                   | To be determined, not under development         |
+| newFilename            |                                                                | New in version 1. To be determined, not under development         |
+| isShowNoChange         | Display source code when there is no comparison                             | Removed as it became the default in version 1.x |
+| trim                   | Remove blank characters at the beginning and end of the string              | None                                            |
 | noDiffLineFeed         | Don't diff Windows line feed (CRLF) and Linux line feed (LF)                | None                                            |
+| theme                  | Add dark mode                                                               | New in version 1                                            |
 
 ## Star History
 
