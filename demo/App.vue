@@ -13,6 +13,7 @@ const formState = reactive({
   trim: false,
   noDiffLineFeed: false,
   filename: 'package.json',
+  newFilename: 'newPackage.json',
   hideHeader: false,
   hideStat: false,
 })
@@ -59,12 +60,18 @@ function printEvent(e) {
       <a-button><a href="https://github.com/Shimada666/v-code-diff">View on Github</a></a-button>
     </div>
     <div style="display: flex; justify-content: space-between;">
-      <textarea v-model="oldString" style="width: 48vw; margin-right: 10px;" :rows="20" />
-      <textarea v-model="newString" style="width: 48vw;" :rows="20" />
+      <div style="margin-right: 5px;">
+        <a-input v-model:value="formState.filename" />
+        <textarea v-model="oldString" style="width: 48vw;" :rows="20" />
+      </div>
+      <div>
+        <a-input v-model:value="formState.newFilename" />
+        <textarea v-model="newString" style="width: 48vw;" :rows="20" />
+      </div>
+
     </div>
     <div style="margin-top: 10px;">
-      <a-button style="margin-right: 5px;"
-        @click="resetText">
+      <a-button style="margin-right: 5px;" @click="resetText">
         重置文本(reset text)
       </a-button>
       <a-button type="default" @click="clearText">
@@ -152,8 +159,8 @@ function printEvent(e) {
     <div>
       <CodeDiff :theme="formState.theme" :old-string="oldString" :new-string="newString" :language="formState.language"
         :diff-style="formState.diffStyle" :output-format="formState.outputFormat" :context="formState.context"
-        :trim="formState.trim" :no-diff-line-feed="formState.noDiffLineFeed" filename="File Name"
-        new-filename="New File Name" :hide-header="formState.hideHeader" :hide-stat="formState.hideStat"
+        :trim="formState.trim" :no-diff-line-feed="formState.noDiffLineFeed" :filename="formState.filename"
+        :new-filename="formState.newFilename" :hide-header="formState.hideHeader" :hide-stat="formState.hideStat"
         @diff="printEvent" />
     </div>
   </div>

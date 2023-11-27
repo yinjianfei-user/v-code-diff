@@ -121,7 +121,7 @@ Vue.use(CodeDiff);
 | maxHeight      | 组件最大高度，例如 300px                                                                                                                | string    | -                          | undefined    |
 | filename       | 文件名                                                                                                                                  | string    | -                          | undefined    |
 | newFilename    | 新文件文件名                                                                                                                   | string    | -                          | undefined    |
-| theme          | 用于切换日间模式/夜间模式                                                                                                               | ThemeType | light , dark               | 'light'      |
+| theme          | 用于切换日间模式/夜间模式                                                                                                               | ThemeType | light , dark               | light      |
 
 ## 组件事件
 

@@ -123,7 +123,7 @@ Not recommended, but the relevant capabilities are retained to facilitate migrat
 | maxHeight      | Maximum height of component, for example: 300px                                                                                                                         | string    | -                          | undefined     |
 | filename       | Filename                                                                                                                                                                | string    | -                          | undefined     |
 | newFilename    | New filename                                                                                                                                                            | string    | -                          | undefined     |
-| theme          | Add dark mode                                                                                                                                                           | ThemeType | light , dark               | 'light'       |
+| theme          | Add dark mode                                                                                                                                                           | ThemeType | light , dark               | light       |
 
 ## Events
 
