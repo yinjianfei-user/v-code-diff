@@ -16,7 +16,8 @@
     "scripts",
     "dist",
     "src",
-    "types"
+    "types",
+    "LICENSE"
   ],
   "scripts": {
     "build": "npm run clean && run-s build:**",
