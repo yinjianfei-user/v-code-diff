@@ -4,6 +4,8 @@ import { reactive, ref, watch } from 'vue'
 import { newShortText } from './text/new-short-text'
 import { oldShortText } from './text/old-short-text'
 
+const appVersion = __APP_VERSION__
+
 const formState = reactive({
   language: 'json',
   theme: 'light',
@@ -55,9 +57,11 @@ function printEvent(e) {
       <h1>v-code-diff</h1>
       <p>A code diff display plugin, available for Vue2 / Vue3.</p>
       <p align="center">
-        Vue version: {{ version }}. CodeDiff version: 1.8.0
+        Vue version: {{ version }}. CodeDiff version: {{ appVersion }}
       </p>
-      <a-button><a href="https://github.com/Shimada666/v-code-diff">View on Github</a></a-button>
+      <a-button type="primary">
+        <a href="https://github.com/Shimada666/v-code-diff">View on Github</a>
+      </a-button>
     </div>
     <div style="display: flex; justify-content: space-between;">
       <div style="margin-right: 5px;">
@@ -68,7 +72,6 @@ function printEvent(e) {
         <a-input v-model:value="formState.newFilename" />
         <textarea v-model="newString" style="width: 48vw;" :rows="20" />
       </div>
-
     </div>
     <div style="margin-top: 10px;">
       <a-button style="margin-right: 5px;" @click="resetText">
@@ -85,8 +88,9 @@ function printEvent(e) {
             <a-form-item label="语言(langauge)">
               <a-select v-model:value="formState.language" style="width: 12vw;">
                 <a-select-option
-                  v-for=" item in ['plaintext', 'json', 'yaml', 'javascript', 'java', 'python', 'sql', 'xml', 'bash'] "
-                  :key="item" :value="item">
+                  v-for="item in ['plaintext', 'json', 'yaml', 'javascript', 'java', 'python', 'sql', 'xml', 'bash']"
+                  :key="item" :value="item"
+                >
                   {{ item }}
                 </a-select-option>
               </a-select>
@@ -157,11 +161,13 @@ function printEvent(e) {
       </a-form>
     </a-card>
     <div>
-      <CodeDiff :theme="formState.theme" :old-string="oldString" :new-string="newString" :language="formState.language"
+      <CodeDiff
+        :theme="formState.theme" :old-string="oldString" :new-string="newString" :language="formState.language"
         :diff-style="formState.diffStyle" :output-format="formState.outputFormat" :context="formState.context"
         :trim="formState.trim" :no-diff-line-feed="formState.noDiffLineFeed" :filename="formState.filename"
         :new-filename="formState.newFilename" :hide-header="formState.hideHeader" :hide-stat="formState.hideStat"
-        @diff="printEvent" />
+        @diff="printEvent"
+      />
     </div>
   </div>
 </template>
