@@ -61,10 +61,10 @@ pnpm add @vue/composition-api
 #### 注册为全局组件
 
 ```ts
-import { createApp } from "vue";
-import CodeDiff from "v-code-diff";
+import { createApp } from 'vue'
+import CodeDiff from 'v-code-diff'
 
-app.use(CodeDiff).mount("#app");
+app.use(CodeDiff).mount('#app')
 ```
 
 然后
@@ -88,10 +88,10 @@ app.use(CodeDiff).mount("#app");
 #### 注册为全局组件
 
 ```ts
-import Vue from "vue";
-import CodeDiff from "v-code-diff";
+import Vue from 'vue'
+import CodeDiff from 'v-code-diff'
 
-Vue.use(CodeDiff);
+Vue.use(CodeDiff)
 ```
 
 #### 单独引入

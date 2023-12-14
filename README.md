@@ -48,7 +48,7 @@ yarn add v-code-diff
 pnpm add v-code-diff
 ```
 
-Vue2 developers need install composition-api
+Vue2.6 developers need install composition-api
 
 ```shell
 pnpm add @vue/composition-api
