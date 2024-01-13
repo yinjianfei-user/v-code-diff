@@ -135,19 +135,28 @@ function getHighlightCode(language: string, code: string) {
     .replace(new RegExp(closeEntity, 'g'), '</span>')
 }
 
-function calcDiffStat(changes: Change[]): DiffStat {
+function calcDiffStat(changes: Change[], ignoreRegex?: RegExp): DiffStat {
   const count = (s: string, c: string) => (s.match(new RegExp(c, 'g')) || []).length
+  const ignoreCount = (lines: string[]) => lines.filter(line => ignoreRegex?.test(line)).length
 
   let additionsNum = 0
   let deletionsNum = 0
+  const ignoreNum = { additions: 0, deletions: 0 }
   for (const change of changes) {
-    if (change.added)
-      additionsNum += count(change.value.trim(), '\n') + 1
-
-    if (change.removed)
-      deletionsNum += count(change.value.trim(), '\n') + 1
+    if (change.added) {
+      const ignoreLines = ignoreCount(change.value.trim().split('\n'))
+      additionsNum += count(change.value.trim(), '\n') + 1 - ignoreLines
+      ignoreNum.additions += ignoreLines
+      continue
+    }
+    if (change.removed) {
+      const ignoreLines = ignoreCount(change.value.trim().split('\n'))
+      deletionsNum += count(change.value.trim(), '\n') + 1 - ignoreLines
+      ignoreNum.deletions += ignoreLines
+      continue
+    }
   }
-  return { additionsNum, deletionsNum }
+  return { additionsNum, deletionsNum, ignoreNum }
 }
 
 export function createSplitDiff(
@@ -156,10 +165,12 @@ export function createSplitDiff(
   language = 'plaintext',
   diffStyle = 'word',
   context = 10,
+  ignoreMatchingLines?: string,
 ): SplitViewerChange {
   const newEmptySplitDiff = (): DiffLine => ({ type: DiffType.EMPTY })
   const newSplitDiff = (type: DiffType, num: number, code: string): DiffLine => ({ type, num, code })
   const changes = diffLines(oldString, newString)
+  const ignoreRegex = ignoreMatchingLines ? new RegExp(ignoreMatchingLines) : undefined
 
   let delNum = 0
   let addNum = 0
@@ -169,7 +180,7 @@ export function createSplitDiff(
   const result: SplitViewerChange = {
     changes: rawChanges,
     collector: [],
-    stat: calcDiffStat(changes),
+    stat: calcDiffStat(changes, ignoreRegex),
   }
 
   for (let i = 0; i < changes.length; i++) {
@@ -256,14 +267,17 @@ export function createSplitDiff(
 
           const leftLine = curLines.length === nextLines.length ? renderWords(nextLine, curLine, diffStyle) : curLine
           const rightLine = curLines.length === nextLines.length ? renderWords(curLine, nextLine, diffStyle) : nextLine
+          // 忽略匹配的行等价于相等
+          const leftDiffType = ignoreRegex?.test(leftLine) ? DiffType.EQUAL : DiffType.DELETE
+          const rightDiffType = ignoreRegex?.test(rightLine) ? DiffType.EQUAL : DiffType.ADD
 
           const left
             = j < cur.count!
-              ? newSplitDiff(DiffType.DELETE, delNum, getHighlightCode(language, leftLine))
+              ? newSplitDiff(leftDiffType, delNum, getHighlightCode(language, leftLine))
               : newEmptySplitDiff()
           const right
             = j < next.count!
-              ? newSplitDiff(DiffType.ADD, addNum, getHighlightCode(language, rightLine))
+              ? newSplitDiff(rightDiffType, addNum, getHighlightCode(language, rightLine))
               : newEmptySplitDiff()
 
           rawChanges.push({ left, right })

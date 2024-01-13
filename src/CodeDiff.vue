@@ -21,6 +21,8 @@ interface Props {
   hideHeader?: boolean
   hideStat?: boolean
   theme?: 'light' | 'dark'
+  // Give a pattern to ignore matching lines eg: '(time|token)' (**Only support side-by-side**)
+  ignoreMatchingLines?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -36,6 +38,7 @@ const props = withDefaults(defineProps<Props>(), {
   hideHeader: false,
   hideStat: false,
   theme: 'light',
+  ignoreMatchingLines: undefined,
 })
 
 const emits = defineEmits<{
@@ -68,7 +71,7 @@ const newString = computed(() => {
 const raw = computed(() =>
   isUnifiedViewer.value
     ? createUnifiedDiff(oldString.value, newString.value, props.language, props.diffStyle, props.context)
-    : createSplitDiff(oldString.value, newString.value, props.language, props.diffStyle, props.context),
+    : createSplitDiff(oldString.value, newString.value, props.language, props.diffStyle, props.context, props.ignoreMatchingLines),
 )
 const diffChange = ref(raw.value)
 const isNotChanged = computed(() => diffChange.value.stat.additionsNum === 0 && diffChange.value.stat.deletionsNum === 0)
@@ -110,6 +113,10 @@ watch(() => props, () => {
             <slot name="stat" :stat="diffChange.stat">
               <span class="diff-stat-added">+{{ diffChange.stat.additionsNum }} additions</span>
               <span class="diff-stat-deleted">-{{ diffChange.stat.deletionsNum }} deletions</span>
+              <span
+                v-if="diffChange.stat.ignoreNum.additions + diffChange.stat.ignoreNum.deletions > 0"
+                class="diff-stat-ignored"
+              >±{{ diffChange.stat.ignoreNum.additions + diffChange.stat.ignoreNum.deletions }} lines</span>
             </slot>
           </span>
         </span>

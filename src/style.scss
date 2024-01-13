@@ -38,12 +38,17 @@
         width: 50%;
       }
       .diff-stat {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         .diff-stat-added {
           color: var(--color-diffstat-addition-bg);
         }
         .diff-stat-deleted {
-          margin-left: 8px;
           color: var(--color-danger-emphasis);
+        }
+        .diff-stat-ignored {
+          color: var(--color-fg-subtle);
         }
       }
     }
