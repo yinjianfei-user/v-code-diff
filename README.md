@@ -126,7 +126,7 @@ Not recommended, but the relevant capabilities are retained to facilitate migrat
 | hideHeader | Hide header bar | boolean | - | false |
 | hideStat | Hide statistical part in the header bar | boolean | - | false |
 | theme          | Add dark mode                                                                                                                                                           | ThemeType | light , dark               | light       |
-| ignoreMatchingLines | Give a pattern to ignore matching lines eg: '(time\|token)' (**Only support side-by-side**) | string | - | undefined |
+| ignoreMatchingLines | Give a pattern to ignore matching lines eg: '(time\|token)' | string | - | undefined |
 
 ## Events
 

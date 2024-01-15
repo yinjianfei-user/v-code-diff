@@ -21,7 +21,7 @@ interface Props {
   hideHeader?: boolean
   hideStat?: boolean
   theme?: 'light' | 'dark'
-  // Give a pattern to ignore matching lines eg: '(time|token)' (**Only support side-by-side**)
+  // Give a pattern to ignore matching lines eg: '(time|token)'
   ignoreMatchingLines?: string
 }
 
@@ -70,7 +70,7 @@ const newString = computed(() => {
 
 const raw = computed(() =>
   isUnifiedViewer.value
-    ? createUnifiedDiff(oldString.value, newString.value, props.language, props.diffStyle, props.context)
+    ? createUnifiedDiff(oldString.value, newString.value, props.language, props.diffStyle, props.context, props.ignoreMatchingLines)
     : createSplitDiff(oldString.value, newString.value, props.language, props.diffStyle, props.context, props.ignoreMatchingLines),
 )
 const diffChange = ref(raw.value)

@@ -124,7 +124,7 @@ Vue.use(CodeDiff)
 | hideHeader | 隐藏头部栏 | boolean | - | false |
 | hideStat | 隐藏头部栏中的统计信息 | boolean | - | false |
 | theme          | 用于切换日间模式/夜间模式                                                                                                               | ThemeType | light , dark               | light      |
-| ignoreMatchingLines | 给出一个模式来忽略匹配行，例如：'(time\|token)'（**仅支持 side-by-side**） | string | - |  |
+| ignoreMatchingLines | 给出一个模式来忽略匹配行，例如：'(time\|token)' | string | - |  |
 
 ## 组件事件
 

@@ -361,8 +361,10 @@ export function createUnifiedDiff(
   language = 'plaintext',
   diffStyle = 'word',
   context = 10,
+  ignoreMatchingLines?: string,
 ): UnifiedViewerChange {
   const changes = diffLines(oldString, newString)
+  const ignoreRegex = ignoreMatchingLines ? new RegExp(ignoreMatchingLines) : undefined
 
   let delNum = 0
   let addNum = 0
@@ -372,7 +374,7 @@ export function createUnifiedDiff(
   const result: UnifiedViewerChange = {
     changes: rawChanges,
     collector: [],
-    stat: calcDiffStat(changes),
+    stat: calcDiffStat(changes, ignoreRegex),
   }
 
   for (let i = 0; i < changes.length; i++) {
@@ -434,7 +436,11 @@ export function createUnifiedDiff(
           delNum++
 
           const code = getHighlightCode(language, renderWords(nextLine, curLine, diffStyle))
-          rawChanges.push({ type: DiffType.DELETE, code, delNum })
+          rawChanges.push({
+            type: ignoreRegex?.test(curLine) ? DiffType.EQUAL : DiffType.DELETE,
+            code,
+            delNum,
+          })
         }
 
         for (let j = 0; j < nextLines.length; j++) {
@@ -443,7 +449,11 @@ export function createUnifiedDiff(
           addNum++
 
           const code = getHighlightCode(language, renderWords(curLine, nextLine, diffStyle))
-          rawChanges.push({ type: DiffType.ADD, code, addNum })
+          rawChanges.push({
+            type: ignoreRegex?.test(nextLine) ? DiffType.EQUAL : DiffType.ADD,
+            code,
+            addNum,
+          })
         }
 
         skip = true
