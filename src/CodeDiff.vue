@@ -113,10 +113,6 @@ watch(() => props, () => {
             <slot name="stat" :stat="diffChange.stat">
               <span class="diff-stat-added">+{{ diffChange.stat.additionsNum }} additions</span>
               <span class="diff-stat-deleted">-{{ diffChange.stat.deletionsNum }} deletions</span>
-              <span
-                v-if="diffChange.stat.ignoreNum.additions + diffChange.stat.ignoreNum.deletions > 0"
-                class="diff-stat-ignored"
-              >±{{ diffChange.stat.ignoreNum.additions + diffChange.stat.ignoreNum.deletions }} lines</span>
             </slot>
           </span>
         </span>
