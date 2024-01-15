@@ -37,6 +37,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --ext .vue,.js,.jsx,.ts,.tsx,json --fix --ignore-path .gitignore",
     "postinstall": "node scripts/postinstall.cjs",
+    "prepublishOnly": "npm run build",
     "release": "bumpp --commit --no-push --tag && npm publish"
   },
   "peerDependencies": {
