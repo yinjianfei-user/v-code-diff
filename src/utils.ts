@@ -141,22 +141,28 @@ function calcDiffStat(changes: Change[], ignoreRegex?: RegExp): DiffStat {
 
   let additionsNum = 0
   let deletionsNum = 0
-  const ignoreNum = { additions: 0, deletions: 0 }
+  let ignoreAdditionsNum = 0
+  let ignoreDeletionsNum = 0
   for (const change of changes) {
     if (change.added) {
-      const ignoreLines = ignoreCount(change.value.trim().split('\n'))
-      additionsNum += count(change.value.trim(), '\n') + 1 - ignoreLines
-      ignoreNum.additions += ignoreLines
+      const ignoreNum = ignoreCount(change.value.trim().split('\n'))
+      additionsNum += count(change.value.trim(), '\n') + 1 - ignoreNum
+      ignoreAdditionsNum += ignoreNum
       continue
     }
     if (change.removed) {
-      const ignoreLines = ignoreCount(change.value.trim().split('\n'))
-      deletionsNum += count(change.value.trim(), '\n') + 1 - ignoreLines
-      ignoreNum.deletions += ignoreLines
+      const ignoreNum = ignoreCount(change.value.trim().split('\n'))
+      deletionsNum += count(change.value.trim(), '\n') + 1 - ignoreNum
+      ignoreDeletionsNum += ignoreNum
       continue
     }
   }
-  return { additionsNum, deletionsNum, ignoreNum }
+  return {
+    additionsNum,
+    deletionsNum,
+    ignoreAdditionsNum,
+    ignoreDeletionsNum,
+  }
 }
 
 export function createSplitDiff(
