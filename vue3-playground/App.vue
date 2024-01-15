@@ -14,7 +14,7 @@ const form = reactive({
   newFilename: 'newFile',
   language: 'json',
   diffStyle: 'word',
-  outputFormat: 'site-by-site',
+  outputFormat: 'side-by-side',
   ignoreMatchingLines: 'time',
   context: 3,
 })
