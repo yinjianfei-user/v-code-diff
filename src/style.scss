@@ -29,12 +29,12 @@
       height: 24px;
 
       .info-left {
-        font-size: 13px;
         color: var(--color-fg-default);
       }
       .info-right {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 50%;
       }
       .diff-stat {
