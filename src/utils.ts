@@ -273,9 +273,10 @@ export function createSplitDiff(
 
           const leftLine = curLines.length === nextLines.length ? renderWords(nextLine, curLine, diffStyle) : curLine
           const rightLine = curLines.length === nextLines.length ? renderWords(curLine, nextLine, diffStyle) : nextLine
+
           // 忽略匹配的行等价于相等
-          const leftDiffType = ignoreRegex?.test(leftLine) ? DiffType.EQUAL : DiffType.DELETE
-          const rightDiffType = ignoreRegex?.test(rightLine) ? DiffType.EQUAL : DiffType.ADD
+          const leftDiffType = ignoreRegex?.test(curLine) ? DiffType.EQUAL : DiffType.DELETE
+          const rightDiffType = ignoreRegex?.test(nextLine) ? DiffType.EQUAL : DiffType.ADD
 
           const left
             = j < cur.count!
