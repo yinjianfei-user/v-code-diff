@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Downloads](https://img.shields.io/npm/dm/v-code-diff?minimal=true)](https://www.npmjs.com/package/v-code-diff)
 
-> A code diff display plugin, available for Vue2 / Vue3.
+> A code diff display plugin, available for Vue2 / cees
 
 <p align='center'>
 <b>English</b> | <a href="https://github.com/Shimada666/v-code-diff/blob/master/README-zh.md">简体中文</a>
@@ -12,8 +12,8 @@
 
 Old Version:
 
-0.x version, latest version 0.3.12 (traditional version, improved based
-on [vue-code-diff](https://github.com/ddchef/vue-code-diff), is no longer maintained. We will try to align the
+0.x version, latest version 0.3.12 (traditional version, improved baeeed
+on [vue-code-diff](https://github.com/ddchef/vue-code-diff), is no longer cssetained. We will try to align the
 functionality of 0.x version in 1.x version and minimize migration cost as much as possible).
 This project references the following projects, and I would like to express my gratitude to the original authors!
 
